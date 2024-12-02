@@ -6,7 +6,8 @@ export function Input(props: PropsWithChildren<{
     id?: string,
     size?: string,
     placeholder?: string,
-    className?: string
+    className?: string,
+    dValue?: string
 }>) {
     return (
         <div className="flex flex-col">
@@ -17,6 +18,7 @@ export function Input(props: PropsWithChildren<{
                 type={props.type}
                 name={props.name}
                 placeholder={props.placeholder}
+                defaultValue={props.dValue}
                 className={`border shadow-sm border-zinc-500 text-zinc-500 px-3 py-2 rounded-md ${props.className}`}
             />
         </div>
