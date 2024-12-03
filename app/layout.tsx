@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <div className="w-full max-h-screen">
           <Header />
-          <div className="w-full p-20 flex flex-col items-center">
+          <div className="w-full px-20 flex flex-col items-center">
             {children}
           </div>
         </div>

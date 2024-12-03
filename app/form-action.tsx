@@ -1,7 +1,7 @@
 "use client"
 import { Input } from "@/src/components/input"
-import { Button } from "@/src/components/button"
-import { createBookAction } from "./form.action"
+import { createBookAction } from "./book.action"
+import { faker } from "@faker-js/faker"
 
 export function FormAction() {
 
@@ -16,11 +16,11 @@ export function FormAction() {
 
     return (
         <form action={onSubmit} className="flex flex-col gap-2">
-            <Input type="text" name="title" id="title" children="mams" />
+            <Input type="text" name="title" id="title" children="mams" dValue={faker.book.title()} />
             <Input type="text" name="author" id="author" children="Auteur" />
             <Input type="type" name="types" id="type" children="Genre" />
             <Input type="type" name="date" id="date-pub" children="Date de publication" />
-            <Button type="submit" className="w-full">submit</Button>
+            <button type="submit" className="w-full rounded-md px-3 py-2 text-white">submit</button>
         </form>
     )
 }
