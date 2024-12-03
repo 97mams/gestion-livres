@@ -1,7 +1,7 @@
 import { prisma } from "@/src/lib/prisma";
 import { Table, TableHeader, TableTh, TableBody, TableTd, TableTr } from "@/src/components/table";
 import Link from "next/link";
-import { DeletedButton } from "../deletedBok";
+import { DeletedButton } from "../deletedBook";
 
 export default async function Page() {
 
