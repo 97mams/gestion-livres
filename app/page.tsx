@@ -1,25 +1,38 @@
-export default function Home() {
+import { prisma } from "@/src/lib/prisma";
+import { Table, TableHeader, TableTh, TableBody, TableTd, TableTr } from "@/src/components/table";
+
+export default async function Page() {
+  const bookLists = await prisma.books.findMany()
+
   return (
-    <div className="flex gap-2 w-full items-center justify-between p-8">
-      <div className=" text-zinc-800">
-        <h1 className="text-blue-700 font-semibold uppercase text-4xl">Library</h1>
-        <form action="" className="flex flex-col gap-2">
-          <div>
-            <label htmlFor="username">Pseudo</label>
-            <input type="text" className="border border-zinc-900 rounded-md px-4 py-2" id="username" />
-          </div>
-          <div>
-            <label htmlFor="password">Mot de passe</label>
-            <input type="password" className="border border-zinc-900 rounded-md px-4 py-2" id="password" />
-          </div>
-          <button className="border bg-blue-700 text-white rounded-md w-full px-4 py-2">
-            Connecter
-          </button>
-        </form>
-      </div>
-      <div >
-        <img src="/bg.jpg" className="w-full" alt="logo" />
-      </div>
+    <div className="p-8">
+      <h1 className="text-gray-600 pb-2 text-3xl font-bold">Liste livres</h1>
+      <Table>
+        <TableHeader>
+          <TableTh>Auteur</TableTh>
+          <TableTh>Titre</TableTh>
+          <TableTh>Genre</TableTh>
+          <TableTh>Date de sortie</TableTh>
+        </TableHeader>
+        <TableBody>
+          {bookLists.map(book => (
+            <TableTr key={book.id}>
+              <TableTd>
+                {book.author}
+              </TableTd>
+              <TableTd>
+                {book.title}
+              </TableTd>
+              <TableTd>
+                {book.types}
+              </TableTd>
+              <TableTd>
+                {book.date_publish}
+              </TableTd>
+            </TableTr>
+          ))}
+        </TableBody>
+      </Table>
     </div>
-  );
+  )
 }
