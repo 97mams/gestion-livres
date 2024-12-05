@@ -48,7 +48,9 @@ export default async function RootLayout({
           <Header />
           <div className="w-full px-20 flex items-start">
             <SideBar items={data} />
-            {children}
+            <div className="flex h-full w-full justify-center">
+              {children}
+            </div>
           </div>
         </div>
       </body>
