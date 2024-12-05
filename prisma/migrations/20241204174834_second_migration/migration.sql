@@ -4,5 +4,6 @@ CREATE TABLE "Books" (
     "title" TEXT NOT NULL,
     "author" TEXT NOT NULL,
     "types" TEXT NOT NULL,
+    "resume" TEXT NOT NULL,
     "date_publish" TEXT NOT NULL
 );

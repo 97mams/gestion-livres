@@ -15,5 +15,6 @@ model Books {
   title String
   author String
   types String
+  resume String
   date_publish String
 }

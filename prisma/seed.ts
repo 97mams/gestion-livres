@@ -9,7 +9,8 @@ async function main() {
             title: faker.book.title(),
             author: faker.book.author(),
             types: faker.book.genre(),
-            date_publish: faker.book.publisher()
+            resume: faker.lorem.paragraph(),
+            date_publish: String(faker.date.past({ years: 1990 }))
         }
     })
 }
