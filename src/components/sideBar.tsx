@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export async function SideBar(props: { items: String[] }) {
     return (
-        <div className="w-60 border-r-4 px-4 border-r-gray-700 min-h-screen">
+        <div className="w-60 border-r px-4 border-r-gray-700 min-h-screen">
             <button className="text-xl w-full mt-8 bg-gray-900 rounded-sm p-2">Genres</button>
             <ul className="w-full flex flex-col gap-2 mt-2 ">
                 {
