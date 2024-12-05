@@ -21,6 +21,7 @@ export default async function Page() {
                 <TableBody>
                     {bookLists.map(book => (
                         <TableTr key={book.id}>
+
                             <TableTd>
                                 {book.author}
                             </TableTd>
@@ -37,6 +38,7 @@ export default async function Page() {
                                 <div className="flex gap-2">
                                     <EditButton bookId={book.id} />
                                     <DeletedButton bookId={book.id} />
+                                    <Link href={`/book/${book.id}`}>voir plus...</Link>
                                 </div>
                             </TableTd>
                         </TableTr>
