@@ -42,8 +42,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-800`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} `}>
         <div className="w-full max-h-screen">
           <Header />
           <div className="w-full px-20 flex items-start">

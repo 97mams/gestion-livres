@@ -6,7 +6,7 @@ export default async function Page() {
 
   return (
     <div className="p-8">
-      <h1 className="text-gray-600 pb-2 text-3xl font-bold">Liste livres</h1>
+      <h1 className="text-foreground pb-2 text-3xl font-bold">Liste livres</h1>
       <Table>
         <TableHeader>
           <TableTh>Auteur</TableTh>
