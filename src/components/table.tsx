@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 export function Table(props: PropsWithChildren) {
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left rtl:text-right  text-gray-400">
+            <table className="w-full text-sm text-left rtl:text-right  text-foreground border border-border">
                 {props.children}
             </table>
         </div>
@@ -12,7 +12,7 @@ export function Table(props: PropsWithChildren) {
 
 export function TableHeader(props: PropsWithChildren) {
     return (
-        <thead className="text-xs bg-gray-700 text-gray-400">
+        <thead className="text-xs bg-gray-700 text-foreground">
             <tr>
                 {props.children}
             </tr>
@@ -46,7 +46,7 @@ export function TableTd(props: PropsWithChildren) {
 
 export function TableTr(props: PropsWithChildren) {
     return (
-        <tr className="bg-gray-800 hover:bg-gray-600">
+        <tr className="bg-background hover:bg-gray-600">
             {props.children}
         </tr>
     )
