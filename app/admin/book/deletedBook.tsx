@@ -1,6 +1,6 @@
 "use client";
 
-import { DeletedBookAction } from "../book.action";
+import { DeletedBookAction } from "../../../src/lib/book.action";
 
 export function DeletedButton(params: { bookId: number }) {
     const onDelete = async (id: number) => {

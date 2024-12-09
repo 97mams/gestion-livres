@@ -1,4 +1,4 @@
-import { FormAction } from "@/app/form-action"
+import { FormAction } from "../../../../src/components/form"
 
 export default function Page() {
     return (
