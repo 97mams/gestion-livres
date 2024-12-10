@@ -22,6 +22,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "Paper": "link:@mui/material/Paper",
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.5.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.461.0",
     "next": "15.0.3",

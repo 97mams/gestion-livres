@@ -3,19 +3,16 @@ import { Input } from "@/src/components/input"
 import { createBookAction } from "@/src/lib/book.action"
 import Button from "@mui/material/Button"
 
-interface UploadResult {
-    url: String;
-}
-
 export function FormAction() {
 
     const onSubmit = async (formData: FormData) => {
+        alert("hello")
         await createBookAction({
             title: String(formData.get('title')),
             author: String(formData.get('author')),
             types: String(formData.get('types')),
             resume: String(formData.get('resume')),
-            mockupImages: String(formData.get('upImage') as File),
+            mockupImages: formData.get('upImage') as File,
             date_publish: String(formData.get('date'))
         })
     }
@@ -32,17 +29,8 @@ export function FormAction() {
                     <Input type="type" name="date" id="date-pub" children="Date de publication" />
                     <Input type="file" name="upImage" id="upImage" children="Image" />
                 </div>
-                <Button color="secondary" variant="outlined">submit</Button>
+                <Button color="secondary" type="submit" variant="outlined">submit</Button>
             </form>
         </div>
     )
-}
-
-async function saveFile(file: File) {
-    const arrayBuffer = await file.arrayBuffer()
-    const buffer = new Uint8Array(arrayBuffer)
-    const result = await new Promise<UploadResult>((resolve, reset) => {
-
-    })
-    return result.url
 }
