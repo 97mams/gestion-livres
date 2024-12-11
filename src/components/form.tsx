@@ -12,7 +12,7 @@ export function FormAction() {
             author: String(formData.get('author')),
             types: String(formData.get('types')),
             resume: String(formData.get('resume')),
-            mockupImages: formData.get('upImage') as File,
+            mockupImages: formData.get('upImage') as Blob,
             date_publish: String(formData.get('date'))
         })
     }
