@@ -1,15 +1,24 @@
-import { Card, CardTitle, CardMedia, CardContent } from "./card";
+import { Card, CardTitle, CardFooter, CardMedia, CardContent } from "./card";
 
-export function BookCard() {
+export function BookCard(props: {
+    title?: string,
+    image?: string,
+    description?: string,
+    author: string,
+    date?: string
+}) {
     return (
         <Card>
             <CardTitle>
-                <h1>Titre</h1>
+                <h1>{props.title}</h1>
             </CardTitle>
             <CardContent>
-                <CardMedia src="/kingMakers.jpg" alt="kingMakers" />
-                Placeat aliquam ipsa sit praesentium
+                <CardMedia src={`/uploads/${props.image}`} alt={props.image} />
+                {props.description}
             </CardContent>
-
+            <CardFooter>
+                <p>"{props.author}"</p>
+                <i>{props.date}</i>
+            </CardFooter>
         </Card>)
 }

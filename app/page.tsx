@@ -1,38 +1,46 @@
 import { prisma } from "@/src/lib/prisma";
-import { Table, TableHeader, TableTh, TableBody, TableTd, TableTr } from "@/src/components/table";
+import { BookCard } from "@/src/components/bookCard";
 
 export default async function Page() {
-  const bookLists = await prisma.books.findMany()
-
+  const allBook = await prisma.books.findMany()
+  const recentBook = await prisma.books.findMany({
+    orderBy: { createdAt: "desc" },
+    take: 4
+  })
   return (
-    <div className="p-8">
-      <h1 className="text-foreground pb-2 text-3xl font-bold">Liste livres</h1>
-      <Table>
-        <TableHeader>
-          <TableTh>Auteur</TableTh>
-          <TableTh>Titre</TableTh>
-          <TableTh>Genre</TableTh>
-          <TableTh>Date de sortie</TableTh>
-        </TableHeader>
-        <TableBody>
-          {bookLists.map(book => (
-            <TableTr key={book.id}>
-              <TableTd>
-                {book.author}
-              </TableTd>
-              <TableTd>
-                {book.title}
-              </TableTd>
-              <TableTd>
-                {book.types}
-              </TableTd>
-              <TableTd>
-                {book.date_publish}
-              </TableTd>
-            </TableTr>
-          ))}
-        </TableBody>
-      </Table>
+    <div className="w-full p-4">
+      <div className="w-full flex flex-col gap-3 ">
+        <h1 className="font-bold text-foreground text-2xl">Nouvelle livres</h1>
+        <div className="w-full h-full flex gap-2 mx-4">
+          {
+            recentBook.map((book) => (
+              <BookCard
+                key={book.id}
+                title={book.title}
+                image={book.mockupImages}
+                author={book.author}
+              />
+            ))
+          }
+        </div>
+      </div>
+      <div className="w-full">
+        <h1 className="font-bold text-foreground text-2xl">Livres</h1>
+        <div className="grid grid-cols-4 gap-4">
+          {
+            allBook.map((book) => (
+              <BookCard
+                key={book.id}
+                title={book.title}
+                image={book.mockupImages}
+                author={book.author}
+              />
+            ))
+          }
+        </div>
+      </div>
     </div>
   )
 }
+
+
