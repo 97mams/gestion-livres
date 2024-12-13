@@ -1,5 +1,7 @@
 import { prisma } from "@/src/lib/prisma";
+import { ListBook } from "@/src/components/listBook";
 import { BookCard } from "@/src/components/bookCard";
+import Link from "next/link"
 
 export default async function Page() {
   const allBook = await prisma.books.findMany()
@@ -10,34 +12,8 @@ export default async function Page() {
   return (
     <div className="w-full p-4">
       <div className="w-full flex flex-col gap-3 ">
-        <h1 className="font-bold text-foreground text-2xl">Nouvelle livres</h1>
-        <div className="w-full h-full flex gap-2 mx-4">
-          {
-            recentBook.map((book) => (
-              <BookCard
-                key={book.id}
-                title={book.title}
-                image={book.mockupImages}
-                author={book.author}
-              />
-            ))
-          }
-        </div>
-      </div>
-      <div className="w-full">
-        <h1 className="font-bold text-foreground text-2xl">Livres</h1>
-        <div className="grid grid-cols-4 gap-4">
-          {
-            allBook.map((book) => (
-              <BookCard
-                key={book.id}
-                title={book.title}
-                image={book.mockupImages}
-                author={book.author}
-              />
-            ))
-          }
-        </div>
+        <ListBook data={recentBook} title="Nouveaux livres" />
+        <ListBook data={allBook} title="Touts livres" />
       </div>
     </div>
   )

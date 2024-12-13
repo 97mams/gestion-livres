@@ -1,13 +1,12 @@
-import Link from "next/link"
 import { PropsWithChildren } from "react"
 
-export function Card(props: PropsWithChildren) {
+export function Card(props: PropsWithChildren<{
+    size: string
+}>) {
     return (
-        <Link href={"#"}>
-            <div className="max-w-sm h-72 px-4 py-3 bg-card border border-border rounded-md hover:bg-gray-600/10">
-                {props.children}
-            </div>
-        </Link>
+        <div className={`h-80 py-3 bg-card border border-border rounded-md hover:bg-gray-600/10 ${props.size}`}>
+            {props.children}
+        </div>
     )
 }
 
@@ -35,9 +34,9 @@ export function CardFooter(props: PropsWithChildren) {
     )
 }
 
-export function CardMedia(props: { src: string, alt?: string }) {
+export function CardMedia(props: { src?: string, alt?: string }) {
     return (
-        <div className="full">
+        <div className="w-full">
             <img src={props.src} alt={props.alt} className="h-40 w-full object-contain " />
         </div>
     )
