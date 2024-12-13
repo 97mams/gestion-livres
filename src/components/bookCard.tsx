@@ -8,7 +8,7 @@ export function BookCard(props: {
     date?: string
 }) {
     return (
-        <Card>
+        <Card size={"w-50"}>
             <CardTitle>
                 <h1>{props.title}</h1>
             </CardTitle>
