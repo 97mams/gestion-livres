@@ -11,13 +11,13 @@ async function main() {
             title: faker.book.title(),
             author: faker.book.author(),
             types: faker.book.genre(),
-            resume: faker.lorem.paragraph(),
+            resume: faker.lorem.paragraphs(),
             mockupImages: nameImage,
             date_publish: String(faker.date.past({ years: 1990 }))
         }
     })
 }
-for (let index = 0; index < 20; index++) {
+for (let index = 0; index < 100; index++) {
     main()
         .then(async () => {
             await prisma.$disconnect()
