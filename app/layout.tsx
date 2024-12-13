@@ -4,7 +4,6 @@ import "./globals.css";
 import { Header } from "@/src/components/header";
 import { SideBar } from "@/src/components/sideBar";
 import { prisma } from "@/src/lib/prisma";
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -27,6 +26,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
+
   const genres = await prisma.books.findMany({
     select: {
       types: true
@@ -36,8 +36,6 @@ export default async function RootLayout({
   const arrayGenres = Array.from(genres, (g) => g.types)
 
   const data = [...new Set(arrayGenres)]
-
-  console.log(data);
 
   return (
     <html lang="en">
