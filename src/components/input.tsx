@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 
 export function Input(props: PropsWithChildren<{
-    type: string,
+    type?: string,
     name: string,
     id?: string,
     size?: string,
@@ -24,7 +24,7 @@ export function Input(props: PropsWithChildren<{
                 />
                 :
                 <input
-                    type={props.type}
+                    type={props.type ?? "text"}
                     name={props.name}
                     placeholder={props.placeholder}
                     defaultValue={props.dValue}
