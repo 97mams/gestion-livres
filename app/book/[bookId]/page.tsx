@@ -32,12 +32,19 @@ export default async function Page(props: {
         <div className="p-8 w-full">
             <div className="flex m-auto mb-8 gap-2 w-8/12">
                 <img className="w-1/2 object-cover" src={`/uploads/${book?.mockupImages}`} />
-                <div className="flex items-start flex-col gap-4 w-1/2">
-                    <h2>{book?.title}</h2>
-                    <p className="text-sm">{book?.resume}</p>
+                <div className="flex items-start flex-col gap-4 w-1/2 h-full">
+                    <h2 className="text-xl p-0">
+                        {book?.title}
+                        <br />
+                        <span className="text-sm text-accent m-0">
+                            ({book?.types})
+                        </span>
+                    </h2>
+                    <p className="text-sm text-accent-foreground">{book?.resume}</p>
                     <i>{book?.author}</i>
+                    <p>{book?.date_publish}</p>
                     <div>
-                        <button className="border border-border rounded-md">prendre</button>
+                        <button className="border border-primary rounded-lg">prendre</button>
                     </div>
                 </div>
             </div>
