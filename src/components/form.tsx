@@ -6,7 +6,6 @@ import Button from "@mui/material/Button"
 export function FormAction() {
 
     const onSubmit = async (formData: FormData) => {
-        alert("hello")
         await createBookAction({
             title: String(formData.get('title')),
             author: String(formData.get('author')),
@@ -32,5 +31,25 @@ export function FormAction() {
                 <Button color="secondary" type="submit" variant="outlined">submit</Button>
             </form>
         </div>
+    )
+}
+
+export function UserForm() {
+
+    const onSubmit = (formData: FormData) => {
+        console.log(formData)
+    }
+
+    return (
+        <form
+            className="w-full"
+            action={onSubmit}
+        >
+            <Input className="w-full" name="firstName" id="first-name" children="Nom" placeholder="votre nom" />
+            <Input className="w-full" name="lastName" id="last-name" children="Prénoms" placeholder="votre prenom" />
+            <Input className="w-full" name="mail" id="e-mail" children="E-mail" type="mail" placeholder="exemple@gmail.com" />
+            <Input className="w-full" name="contact" id="contact" children="Téléphone" placeholder="numéro téléphone" />
+            <button className="mt-4 border border-primary text-primary px-3 py-1 rounded-xl hover:bg-primary/20">Ajouter</button>
+        </form>
     )
 }
