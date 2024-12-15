@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/src/components/header";
 import { SideBar } from "@/src/components/sideBar";
 import { prisma } from "@/src/lib/prisma";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",

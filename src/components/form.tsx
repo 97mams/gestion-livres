@@ -1,7 +1,8 @@
 "use client"
 import { Input } from "@/src/components/input"
 import { createBookAction } from "@/src/lib/book.action"
-import Button from "@mui/material/Button"
+import { CreateUserAction } from "@/src/lib/user.action"
+import { useFormStatus } from "react-dom"
 
 export function FormAction() {
 
@@ -28,7 +29,7 @@ export function FormAction() {
                     <Input type="type" name="date" id="date-pub" children="Date de publication" />
                     <Input type="file" name="upImage" id="upImage" children="Image" />
                 </div>
-                <Button color="secondary" type="submit" variant="outlined">submit</Button>
+                <button type="submit">submit</button>
             </form>
         </div>
     )
@@ -36,8 +37,8 @@ export function FormAction() {
 
 export function UserForm() {
 
-    const onSubmit = (formData: FormData) => {
-        console.log(formData)
+    const onSubmit = async (formData: FormData) => {
+        await CreateUserAction(formData)
     }
 
     return (
@@ -49,7 +50,19 @@ export function UserForm() {
             <Input className="w-full" name="lastName" id="last-name" children="Prénoms" placeholder="votre prenom" />
             <Input className="w-full" name="mail" id="e-mail" children="E-mail" type="mail" placeholder="exemple@gmail.com" />
             <Input className="w-full" name="contact" id="contact" children="Téléphone" placeholder="numéro téléphone" />
-            <button className="mt-4 border border-primary text-primary px-3 py-1 rounded-xl hover:bg-primary/20">Ajouter</button>
+            <SubmitButton />
         </form>
+    )
+}
+
+const SubmitButton = () => {
+    const { pending } = useFormStatus()
+    return (
+        <button
+            className="mt-4 border border-primary text-primary px-3 py-1 rounded-xl hover:bg-primary/20"
+        >
+            {pending ? "Loading..." : "Ajouter"}
+        </button>
+
     )
 }

@@ -1,20 +1,20 @@
 import Image from "next/image"
 import { faker } from "@faker-js/faker"
 import Link from "next/link"
-import { Button } from "@mui/material"
 
 export function Header() {
 
     return (
-        <div className="sticky top-0 pt-4 bg-background">
-            <div className="w-full px-8 py-4 border-b border-b-border flex justify-between">
-                <Link href="/" >
-                    <img src={"/vercel.svg"} alt={"log"} className="w-8 h-8 rounded-full bg-gray-900 p-2" />
-                </Link>
-                <div>
-                    {/* <Button variant="outlined" className="" href={"/"}>s'inscrire</Button> */}
-                </div>
-            </div>
-        </div>
+        <nav className="sticky top-0 z-10 bg-accent text-foreground">
+            <div className="max-w-5xl mx-auto px-4">
+                < div className="flex items-center justify-between h-16" >
+                    <span className="text-2xl font-semibold">Boky</span>
+                    <div className="flex space-x-4">
+                        <a href="/">Home</a>
+                        <a href="/book/lists">Liste</a>
+                    </div>
+                </div >
+            </div >
+        </nav >
     )
 }

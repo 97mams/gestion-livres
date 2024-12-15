@@ -4,7 +4,7 @@ export function Card(props: PropsWithChildren<{
     size: string
 }>) {
     return (
-        <div className={`h-80 py-3 bg-card border border-border rounded-md hover:bg-gray-600/10 ${props.size}`}>
+        <div className={`h-80 flex flex-col items-center justify-center bg-card border border-border rounded-xl hover:bg-gray-600/10 ${props.size}`}>
             {props.children}
         </div>
     )

@@ -10,7 +10,7 @@ export function BookCard(props: {
     return (
         <Card size={"w-50"}>
             <CardTitle>
-                <h1>{props.title}</h1>
+                <p className="truncate">{props.title}</p>
             </CardTitle>
             <CardContent>
                 <CardMedia src={`/uploads/${props.image}`} alt={props.image} />

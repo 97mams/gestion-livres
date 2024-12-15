@@ -46,7 +46,7 @@ export function TableTd(props: PropsWithChildren) {
 
 export function TableTr(props: PropsWithChildren) {
     return (
-        <tr className="bg-background hover:bg-gray-600">
+        <tr className="bg-background hover:bg-gray-600 w-full">
             {props.children}
         </tr>
     )

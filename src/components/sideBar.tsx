@@ -1,6 +1,12 @@
-import Link from "next/link"
+"use client";
 
-export async function SideBar(props: { items: String[] }) {
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+export function SideBar(props: { items: String[] }) {
+    const pathname: string = usePathname()
+    const active: string = "line-through"
+
     return (
         <div className="w-60 border-r px-4 border-r-gray-700 min-h-screen rounded-md">
             <p className="text-xl w-full mt-8 bg-gray-900 rounded-sm p-2">Genres</p>
@@ -9,7 +15,7 @@ export async function SideBar(props: { items: String[] }) {
                     props.items.map((item, key) => (
                         <li
                             key={key}
-                            className="w-full hover:line-through"
+                            className={`w-full hover:line-through ${pathname.includes(String(item)) ? active : ''}`}
                         >
                             <Link href={`/book/lists/${item}`}>{item}</Link>
                         </li>
