@@ -4,7 +4,7 @@ CREATE TABLE "Members" (
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "contact" INTEGER NOT NULL,
+    "contact" TEXT NOT NULL,
     "status" BOOLEAN NOT NULL DEFAULT false
 );
 

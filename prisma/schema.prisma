@@ -29,7 +29,7 @@ model Members {
   firstName String
   lastName  String
   email     String
-  contact   Int
+  contact   String
   status    Boolean @default(false)
   emprunt   Emprunts[]
 }

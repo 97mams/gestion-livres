@@ -7,7 +7,7 @@ export async function CreateUserAction(formData: FormData) {
         firstName: String(formData.get('firstName')),
         lastName: String(formData.get('lastName')),
         email: String(formData.get('mail')),
-        contact: Number(formData.get('contact')),
+        contact: String(formData.get('contact')),
     }
 
     const member = await prisma.members.create({
