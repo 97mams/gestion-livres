@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from '@/src/lib/prisma'
+import { redirect } from 'next/navigation';
 
 export async function CreateUserAction(formData: FormData) {
     const data = {
@@ -14,6 +15,9 @@ export async function CreateUserAction(formData: FormData) {
         data
     })
 
-    console.log(member)
+    if (member) {
+        redirect("/admin/users/new")
+    }
+    throw new Error("user add fail")
 
 }
