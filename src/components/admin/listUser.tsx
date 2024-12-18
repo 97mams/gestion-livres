@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Table, TableBody, TableHeader, TableTd, TableTh, TableTr } from "@/src/components/table"
 import { useEffect, useState } from "react"
+import { Modal } from "@/src/components/modal"
 
 interface member {
     id: number,
@@ -13,7 +13,6 @@ interface member {
 }
 
 export function ListUser() {
-    const [openModal, setOpenModal] = useState(false)
     const [users, setUsers] = useState<member[]>()
     const title: string[] = ["id", "Nom", "Prénoms", "Mail", "Tel"]
 
@@ -24,16 +23,6 @@ export function ListUser() {
                 setUsers(data.members)
             })
     }, [])
-
-
-    const handelModale = () => {
-        setOpenModal(true)
-        alert(openModal)
-    }
-
-    const handelCloseModal = () => {
-        setOpenModal(false)
-    }
 
     return (
         <div className="w-full">
@@ -53,7 +42,7 @@ export function ListUser() {
                             <TableTd>
                                 <div className="w-full flex justify-between">
                                     {user.contact}
-                                    <ButtonAction id={user.id} />
+                                    <Modal id={user.id} />
                                 </div>
                             </TableTd>
                         </TableTr>
@@ -65,19 +54,10 @@ export function ListUser() {
 }
 
 function ButtonAction(props: { id: number }) {
-    const [showAction, setShowAction] = useState(false);
-    const onDeleteUser = () => {
 
-    }
     return (
         <div>
-            <button onClick={() => { setShowAction(!showAction) }}>
-                <MoreVertIcon />
-            </button>
-            {showAction ? <div className='w-24 py-2 flex flex-col items-start border bg-slate-500 border-border absolute right-32 z-50'>
-                <p className='w-full hover:bg-primary text-start px-2'>Suprimer</bu>
-                <p className='w-full hover:bg-primary text-start px-2'>Detail</p>
-                <p className='w-full hover:bg-primary text-start px-2'>Modifier</p>
-            </div> : ""}
+
         </div>)
+
 }

@@ -13,7 +13,6 @@ interface book {
 
 export async function ListBook(props: { data?: book[], title?: string }) {
 
-    // await new Promise(r => setTimeout(r, 2000))
     return (<div className="w-full">
         <h1 className="font-bold text-foreground text-2xl my-3">{props.title ?? "Liste"}</h1>
         <div className="grid grid-cols-4 gap-4 mx-3">
