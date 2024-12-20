@@ -2,14 +2,22 @@
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState } from "react"
+import { deletedUserAction } from '../lib/user.action';
 
-export function Modal() {
+export function Modal(props: { id: number }) {
     const [showAction, setShowAction] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const onDeleteUser = () => {
-        if (showModal) {
-            setShowAction(!showModal)
-        }
+        setShowModal(!showModal)
+        setShowAction(!showAction)
+    }
+
+    const onCancel = () => {
+        setShowModal(!showModal)
+    }
+
+    const isConfirm = () => {
+        deletedUserAction(props.id)
         setShowModal(!showModal)
     }
 
@@ -34,8 +42,8 @@ export function Modal() {
                                 </h3>
                             </div>
                             <div className="flex items-center p-4 md:p-5 border-t rounded-b border-gray-600">
-                                <button data-modal-hide="static-modal" type="button" className="text-red-800 px-4 py-2 rounded bg-red-500 hover:bg-red-800 hover:text-white focus:ring-1 focus:outline-none focus:ring-red-300">suprimer</button>
-                                <button data-modal-hide="static-modal" type="button" className="py-2 px-4 ms-3  font-medium text-gray-900 focus:outline-none bg-white rounded hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-gray-100">Annuler</button>
+                                <button onClick={isConfirm} data-modal-hide="static-modal" type="button" className="text-red-800 px-4 py-2 rounded bg-red-500 hover:bg-red-800 hover:text-white focus:ring-1 focus:outline-none focus:ring-red-300">suprimer</button>
+                                <button onClick={onCancel} data-modal-hide="static-modal" type="button" className="py-2 px-4 ms-3  font-medium text-gray-900 focus:outline-none bg-white rounded hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-gray-100">Annuler</button>
                             </div>
                         </div>
                     </div>
