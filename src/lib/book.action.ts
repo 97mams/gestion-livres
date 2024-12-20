@@ -51,7 +51,7 @@ export async function createBookAction(book: {
 }
 
 
-export async function DeletedBookAction(id: number) {
+export async function deletedBookAction(id: number) {
     const deleted = await prisma.books.delete({
         where: {
             id: id
