@@ -21,3 +21,19 @@ export async function CreateUserAction(formData: FormData) {
     throw new Error("user add fail")
 
 }
+
+export async function deletedUserAction(id: number) {
+
+    const deleted = await prisma.members.delete({
+        where: {
+            id
+        }
+    })
+
+    if (deleted) {
+        redirect('/admin/users/lists')
+    } else {
+        throw new Error("deleted user faild")
+    }
+
+}
