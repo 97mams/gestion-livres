@@ -29,8 +29,8 @@ export function Modal(props: { id: number }) {
             {
                 showAction ? <div className='w-24 py-2 flex flex-col rounded items-start border bg-slate-500 border-border absolute right-32 z-50'>
                     <a onClick={onDeleteUser} className='w-full hover:bg-primary text-start px-2'>Suprimer</a>
-                    <p className='w-full hover:bg-primary text-start px-2'>Detail</p>
-                    <p className='w-full hover:bg-primary text-start px-2'>Modifier</p>
+                    <a className='w-full hover:bg-primary text-start px-2'>Detail</a>
+                    <a className='w-full hover:bg-primary text-start px-2'>Modifier</a>
                 </div> : ""
             } {
                 showModal ? <div id="static-modal" data-modal-backdrop="static" tabIndex={-1} aria-hidden="true" className="flex overflow-y-auto bg-white/15 overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" >
