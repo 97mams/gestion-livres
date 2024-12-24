@@ -38,8 +38,15 @@ export async function deletedUserAction(id: number) {
 
 }
 
-export async function updateUserAction(id: number, data?: object) {
-    if (data) {
+export async function updateUserAction(id: number, formData: FormData) {
+
+    if (id) {
+        const data = {
+            firstName: String(formData.get('firstName')),
+            lastName: String(formData.get('lastName')),
+            email: String(formData.get('mail')),
+            contact: String(formData.get('contact')),
+        }
         const member = await prisma.members.update({
             data: data,
             where: {
