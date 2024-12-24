@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from '@/src/lib/prisma'
-import { redirect, RedirectType } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 export async function CreateUserAction(formData: FormData) {
     const data = {
@@ -38,17 +38,19 @@ export async function deletedUserAction(id: number) {
 
 }
 
-async function upateUserAction(id: number, data: object) {
-    const member = await prisma.members.update({
-        data: data,
-        where: {
-            id: id
-        }
-    })
+export async function updateUserAction(id: number, data?: object) {
+    if (data) {
+        const member = await prisma.members.update({
+            data: data,
+            where: {
+                id: id
+            }
+        })
 
-    if (member) {
-        redirect('/admin/users/lists')
-    } else {
-        throw new Error('updated faild')
+        if (member) {
+            redirect('/admin/users/lists')
+        } else {
+            throw new Error('updated faild')
+        }
     }
 } 
