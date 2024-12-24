@@ -52,12 +52,3 @@ export function ListUser() {
         </div>
     )
 }
-
-function ButtonAction(props: { id: number }) {
-
-    return (
-        <div>
-
-        </div>)
-
-}

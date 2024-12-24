@@ -1,7 +1,7 @@
 "use client"
 import { Input } from "@/src/components/input"
 import { createBookAction } from "@/src/lib/book.action"
-import { CreateUserAction } from "@/src/lib/user.action"
+import { CreateUserAction, updateUserAction } from "@/src/lib/user.action"
 import { useFormStatus } from "react-dom"
 
 export function FormAction() {
@@ -35,21 +35,36 @@ export function FormAction() {
     )
 }
 
-export function UserForm() {
+type membre = {
+    id: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    contact: string
+    status: boolean
+}
+
+export function UserForm({ data }: { data?: membre | null }) {
 
     const onSubmit = async (formData: FormData) => {
-        await CreateUserAction(formData)
+        if (data) {
+            await updateUserAction(data.id, formData)
+        } else {
+            await CreateUserAction(formData)
+        }
     }
+
+
 
     return (
         <form
             className="w-full"
             action={onSubmit}
         >
-            <Input className="w-full" name="firstName" id="first-name" children="Nom" placeholder="votre nom" />
-            <Input className="w-full" name="lastName" id="last-name" children="Prénoms" placeholder="votre prenom" />
-            <Input className="w-full" name="mail" id="e-mail" children="E-mail" type="mail" placeholder="exemple@gmail.com" />
-            <Input className="w-full" name="contact" id="contact" children="Téléphone" placeholder="numéro téléphone" />
+            <Input dValue={data?.firstName} className="w-full" name="firstName" id="first-name" children="Nom" placeholder="votre nom" />
+            <Input dValue={data?.lastName} className="w-full" name="lastName" id="last-name" children="Prénoms" placeholder="votre prenom" />
+            <Input dValue={data?.email} className="w-full" name="mail" id="e-mail" children="E-mail" type="mail" placeholder="exemple@gmail.com" />
+            <Input dValue={data?.contact} className="w-full" name="contact" id="contact" children="Téléphone" placeholder="numéro téléphone" />
             <SubmitButton />
         </form>
     )
