@@ -65,18 +65,18 @@ export function UserForm({ data }: { data?: membre | null }) {
             <Input dValue={data?.lastName} className="w-full" name="lastName" id="last-name" children="Prénoms" placeholder="votre prenom" />
             <Input dValue={data?.email} className="w-full" name="mail" id="e-mail" children="E-mail" type="mail" placeholder="exemple@gmail.com" />
             <Input dValue={data?.contact} className="w-full" name="contact" id="contact" children="Téléphone" placeholder="numéro téléphone" />
-            <SubmitButton />
+            <SubmitButton text={data ? "Modifier" : "Ajouter"} />
         </form>
     )
 }
 
-const SubmitButton = () => {
+const SubmitButton = ({ text }: { text: string }) => {
     const { pending } = useFormStatus()
     return (
         <button
             className="mt-4 border border-primary text-primary px-3 py-1 rounded-xl hover:bg-primary/20"
         >
-            {pending ? "Loading..." : "Ajouter"}
+            {pending ? "Loading..." : text}
         </button>
 
     )
