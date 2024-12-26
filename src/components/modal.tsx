@@ -26,6 +26,10 @@ export function Modal(props: { id: number }) {
         redirect(`/admin/users/update/${props.id}`)
     }
 
+    const onDetail = () => {
+        redirect(`/admin/users/${props.id}`)
+    }
+
     return (
         <div>
             <button onClick={() => { setShowAction(!showAction) }}>
@@ -34,7 +38,7 @@ export function Modal(props: { id: number }) {
             {
                 showAction ? <div className='w-24 py-2 flex flex-col rounded items-start border bg-slate-500 border-border absolute right-32 z-50'>
                     <p onClick={onDeleteUser} className='cursor-pointer w-full hover:bg-primary text-start px-2'>Suprimer</p>
-                    <p className='w-full hover:bg-primary cursor-pointer text-start px-2'>Detail</p>
+                    <p onClick={onDetail} className='w-full hover:bg-primary cursor-pointer text-start px-2'>Detail</p>
                     <p onClick={onUpdated} className='cursor-pointer w-full hover:bg-primary text-start px-2'>Modifier</p>
                 </div> : ""
             } {
