@@ -9,12 +9,7 @@ export default async function Page(props: Promise<{ params: { userId: number } }
     return (
         <div className="w-full">
             <div className="max-w-md h-[28rem] border border-border rounded-xl flex m-auto mt-8 space-y-1">
-                <p>
-                    nom: <span className="text-foreground uppercase">{user?.firstName}</span>
-                </p>
-                <p>
-                    prenom: <span className="text-foreground uppercase">{user?.firstName}</span>
-                </p>
+
             </div>
         </div>
     )
