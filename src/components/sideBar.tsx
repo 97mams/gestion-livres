@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 export function SideBar(props: { items: String[] }) {
     const pathname: string = usePathname()
     const active: string = "line-through"
+    console.log(pathname.includes(""))
 
     return (
         <div className="w-60 border-r px-4 border-r-gray-700 min-h-screen rounded-md">

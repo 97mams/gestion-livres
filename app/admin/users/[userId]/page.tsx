@@ -8,8 +8,8 @@ export default async function Page(props: Promise<{ params: { userId: number } }
 
     return (
         <div className="w-full">
-            <div className="max-w-md h-[28rem] border border-border rounded-xl flex m-auto mt-8 space-y-1">
-
+            <div className="max-w-md h-[28rem] border border-border p-8 rounded-xl flex m-auto mt-8 space-y-1">
+                <h1><span className="uppercase">{user?.firstName} </span>{user?.lastName}</h1>
             </div>
         </div>
     )
