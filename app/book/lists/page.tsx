@@ -12,7 +12,7 @@ export default async function Page() {
         <div className="w-full p-4">
             <div className="w-full">
                 <h1 className="font-bold text-foreground text-2xl">Nouvelle livres</h1>
-                <div className="w-full flex gap-4" key={"new-book"}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" key={"new-book"}>
                     {
                         recentBook.map((book) => (
                             <BookCard
@@ -26,7 +26,7 @@ export default async function Page() {
             </div>
             <div className="w-full">
                 <h1 className="font-bold text-foreground text-2xl">Livres</h1>
-                <div className="grid grid-cols-4 gap-4" key={"all-book"}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" key={"all-book"}>
                     {
                         allBook.map((book) => (
                             <BookCard
