@@ -1,5 +1,3 @@
-import { Card, CardTitle, CardFooter, CardMedia, CardContent } from "./card";
-
 export function BookCard(props: {
     title?: string,
     image?: string,
