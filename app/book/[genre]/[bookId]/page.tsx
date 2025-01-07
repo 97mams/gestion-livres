@@ -1,5 +1,6 @@
 import { prisma } from "@/src/lib/prisma"
 import { ListBook } from '@/src/components/listBook'
+import { BackButton } from "@/src/components/backButton"
 
 export default async function Page(props: {
     params: Promise<{
@@ -29,6 +30,7 @@ export default async function Page(props: {
 
     return (
         <div className="p-8 w-full">
+            <BackButton />
             <div
                 className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-border bg-card">
                 <div className="w-full md:w-1/3 grid place-items-center">
@@ -49,7 +51,7 @@ export default async function Page(props: {
                         </div>
                         <div className="">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-pink-500" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
+                                <path
                                     d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
                                 />
                             </svg>
