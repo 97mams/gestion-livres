@@ -30,6 +30,14 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model Session {
+  id            String    @id @default(cuid())
+  sessionToken  String    @unique
+  userId        String
+  expires       DateTime
+  membre        Members   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model VerifivationToken {
   identifier String
   token      String    @unique
