@@ -1,5 +1,6 @@
 import { prisma } from "@/src/lib/prisma"
 import { ListBook } from "@/src/components/listBook"
+import { BackButton } from "@/src/components/backButton"
 
 export default async function (props: {
     params:
@@ -24,7 +25,8 @@ export default async function (props: {
     })
 
     return (
-        <div className="w-full p-4">
+        <div className="h-screen p-8">
+            <BackButton />
             <ListBook data={bookByGenre} title={genre} />
         </div>
     )
