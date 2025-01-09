@@ -3,6 +3,7 @@ import { Input } from "@/src/components/input"
 import { createBookAction } from "@/src/lib/book.action"
 import { CreateUserAction, updateUserAction } from "@/src/lib/user.action"
 import { useFormStatus } from "react-dom"
+import { SubmitButton } from "./SubmitButton"
 
 export function FormAction() {
 
@@ -53,7 +54,7 @@ export function UserForm({ data }: { data?: membre | null }) {
             await CreateUserAction(formData)
         }
     }
-
+    const { pending } = useFormStatus()
 
 
     return (
@@ -65,19 +66,8 @@ export function UserForm({ data }: { data?: membre | null }) {
             <Input dValue={data?.lastName} className="w-full" name="lastName" id="last-name" children="Prénoms" placeholder="votre prenom" />
             <Input dValue={data?.email} className="w-full" name="mail" id="e-mail" children="E-mail" type="mail" placeholder="exemple@gmail.com" />
             <Input dValue={data?.contact} className="w-full" name="contact" id="contact" children="Téléphone" placeholder="numéro téléphone" />
-            <SubmitButton text={data ? "Modifier" : "Ajouter"} />
+            <SubmitButton pending={pending} text={data ? "Modifier" : "Ajouter"} />
         </form>
     )
 }
 
-const SubmitButton = ({ text }: { text: string }) => {
-    const { pending } = useFormStatus()
-    return (
-        <button
-            className="mt-4 border border-primary text-primary px-3 py-1 rounded-xl hover:bg-primary/20"
-        >
-            {pending ? "Loading..." : text}
-        </button>
-
-    )
-}
