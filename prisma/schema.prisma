@@ -68,6 +68,8 @@ model Members {
   contact   String
   status    Boolean @default(false)
   emprunt   Emprunts[]
+  account   Account[]
+  session   Session[]
 }
 
 model Emprunts {
