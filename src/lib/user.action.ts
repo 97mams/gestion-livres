@@ -2,17 +2,20 @@
 
 import { prisma } from '@/src/lib/prisma'
 import { redirect } from 'next/navigation';
+import bcryptjs from 'bcryptjs';
 
 export async function CreateUserAction(formData: FormData) {
+    const salt = bcryptjs.genSaltSync(10)
     const data = {
         firstName: String(formData.get('firstName')),
         lastName: String(formData.get('lastName')),
         email: String(formData.get('mail')),
         contact: String(formData.get('contact')),
+        password: bcryptjs.hashSync(String(formData.get('pwd')), salt),
     }
 
     const member = await prisma.members.create({
-        data
+        data: data
     })
 
     if (member) {
