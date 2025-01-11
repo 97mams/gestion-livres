@@ -1,7 +1,6 @@
 import { prisma } from "@/src/lib/prisma";
 import { ListBook } from "@/src/components/listBook";
-import { BookCard } from "@/src/components/bookCard";
-import Link from "next/link"
+
 
 export default async function Page() {
   const allBook = await prisma.books.findMany()

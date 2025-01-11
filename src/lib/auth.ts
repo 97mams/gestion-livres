@@ -1,8 +1,9 @@
-import NextAuth from 'next-auth';
-import { authConfig } from './auth.config';
+import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod'
 import { prisma } from './prisma';
+import bcryptjs from 'bcryptjs'
+import { PrismaAdapter } from "@auth/prisma-adapter"
 
 async function getUser(email: string) {
     try {
@@ -15,23 +16,31 @@ async function getUser(email: string) {
     }
 }
 
-export const { auth, signIn, signOut } = NextAuth({
-    ...authConfig,
+export const { auth, handlers, signIn, signOut } = NextAuth({
     providers: [
         Credentials({
-            async authorize(credentials) {
+            credentials: {
+                email: {},
+                password: {}
+            },
+            authorize: async (credentials) => {
                 const parsedCredentials = z
                     .object({ email: z.string().email(), password: z.string().min(4) })
                     .safeParse(credentials)
 
                 if (parsedCredentials.success) {
                     const { email, password } = parsedCredentials.data
-                    const user = await getUser(email)
-                    if (!user) return null
-                    const passwordsMatch = await bcrypt.compare(password, user.password)
+                    const member = await getUser(email)
+
+                    if (!member) return null
+                    const passwordsMatch = bcryptjs.compareSync(password, member[0].password)
+                    if (passwordsMatch) return member
                 }
 
                 return null
+
             }
-        })],
+        }
+        )
+    ]
 });

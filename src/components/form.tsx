@@ -66,6 +66,7 @@ export function UserForm({ data }: { data?: membre | null }) {
             <Input dValue={data?.lastName} className="w-full" name="lastName" id="last-name" children="Prénoms" placeholder="votre prenom" />
             <Input dValue={data?.email} className="w-full" name="mail" id="e-mail" children="E-mail" type="mail" placeholder="exemple@gmail.com" />
             <Input dValue={data?.contact} className="w-full" name="contact" id="contact" children="Téléphone" placeholder="numéro téléphone" />
+            <Input dValue={data?.contact} type="password" className="w-full" name="pwd" id="pwd" children="Mot de passe" placeholder="mot de passe" />
             <SubmitButton pending={pending} text={data ? "Modifier" : "Ajouter"} />
         </form>
     )
