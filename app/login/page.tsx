@@ -3,7 +3,7 @@ import { auth } from "@/src/lib/auth"
 
 export default async function Page() {
     const session = await auth()
-    console.log(session?.user);
+    console.log(session?.user?.email);
 
     return (
         < main className="flex items-center justify-center md:h-screen" >
