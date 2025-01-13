@@ -11,12 +11,9 @@ export default async function (props: {
 
     const genreParams = (await props.params).genre
     let genre = genreParams
-    if (genreParams.includes("%")) {
-        const textKey = genreParams.lastIndexOf("%")
-        const textLength = genreParams.length
-        const firstText = genreParams.slice(0, textKey)
-        const lastText = genreParams.slice((textKey + 3), textLength)
-        genre = firstText + " " + lastText
+    if (genreParams.includes("_")) {
+        const genreArray = genreParams.split('_')
+        genre = genreArray[0] + ' ' + genreArray[1]
     }
     const bookByGenre = await prisma.books.findMany({
         where: {
