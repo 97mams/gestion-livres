@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth'
-import Credentials from 'next-auth/providers/credentials';
+import Credentials from 'next-auth/providers/credentials'
 import { z } from 'zod'
 import { prisma } from './prisma';
 import bcryptjs from 'bcryptjs'
@@ -25,23 +25,35 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 password: {}
             },
             authorize: async (credentials) => {
-                const parsedCredentials = z
-                    .object({ email: z.string().email(), password: z.string().min(4) })
-                    .safeParse(credentials)
-
-                if (parsedCredentials.success) {
-                    const { email, password } = parsedCredentials.data
-                    const member = await getUser(email)
-
-                    if (!member) return null
-                    const passwordsMatch = bcryptjs.compareSync(password, member[0].password)
-                    if (passwordsMatch) return member
+                const email = "idiot@gmail.com"
+                const password = "1234"
+                if (credentials.email === email && credentials.password === password) {
+                    return {
+                        email,
+                        password
+                    }
                 }
-
-                return null
-
             }
-        }
-        )
+
+        })
     ]
 });
+
+
+// authorize: async (credentials) => {
+//     const parsedCredentials = z
+//         .object({ email: z.string().email(), password: z.string().min(4) })
+//         .safeParse(credentials)
+
+//     if (parsedCredentials.success) {
+//         const { email, password } = parsedCredentials.data
+//         const member = await getUser(email)
+
+//         if (!member) return null
+//         const passwordsMatch = bcryptjs.compareSync(password, member[0].password)
+//         if (passwordsMatch) return member
+//     }
+
+//     return null
+
+// }
