@@ -9,7 +9,15 @@ export function SideBar(props: { items: String[] }) {
     const chechItem = (item: String) => {
         const text = item.split(' ')
         console.log(text);
+        return text[0]
+    }
 
+    const path = (item: String) => {
+        if (item.includes(' ')) {
+            const text = item.split(' ')
+            return text[0] + '_' + text[1]
+        }
+        return item
     }
 
     return (
@@ -20,9 +28,9 @@ export function SideBar(props: { items: String[] }) {
                     props.items.map((item, key) => (
                         <li
                             key={key}
-                            className={`w-full hover:line-through ${pathname.includes(String(item)) ? active : ''}`}
+                            className={`w-full hover:line-through ${pathname.includes(chechItem(item)) ? active : ''}`}
                         >
-                            <Link href={`/book/lists/${item}`}>{item}</Link>
+                            <Link href={`/book/lists/${path(item)}`}>{item}</Link>
                         </li>
                     ))
                 }
