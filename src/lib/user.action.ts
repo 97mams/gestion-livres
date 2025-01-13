@@ -10,24 +10,24 @@ export async function CreateUserAction(formData: FormData) {
         firstName: String(formData.get('firstName')),
         lastName: String(formData.get('lastName')),
         email: String(formData.get('mail')),
-        contact: String(formData.get('contact')),
+        tel: String(formData.get('contact')),
         password: bcryptjs.hashSync(String(formData.get('pwd')), salt),
     }
 
-    const member = await prisma.members.create({
+    const user = await prisma.user.create({
         data: data
     })
 
-    if (member) {
+    if (user) {
         redirect("/admin/users/new")
     }
     throw new Error("user add fail")
 
 }
 
-export async function deletedUserAction(id: number) {
+export async function deletedUserAction(id: string) {
 
-    const deleted = await prisma.members.delete({
+    const deleted = await prisma.user.delete({
         where: {
             id
         }
@@ -41,7 +41,7 @@ export async function deletedUserAction(id: number) {
 
 }
 
-export async function updateUserAction(id: number, formData: FormData) {
+export async function updateUserAction(id: string, formData: FormData) {
 
     if (id) {
         const data = {
@@ -50,14 +50,14 @@ export async function updateUserAction(id: number, formData: FormData) {
             email: String(formData.get('mail')),
             contact: String(formData.get('contact')),
         }
-        const member = await prisma.members.update({
+        const user = await prisma.user.update({
             data: data,
             where: {
                 id: id
             }
         })
 
-        if (member) {
+        if (user) {
             redirect('/admin/users/lists')
         } else {
             throw new Error('updated faild')
