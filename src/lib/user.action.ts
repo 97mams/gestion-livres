@@ -7,10 +7,10 @@ import bcryptjs from 'bcryptjs';
 export async function CreateUserAction(formData: FormData) {
     const salt = bcryptjs.genSaltSync(10)
     const data = {
-        firstName: String(formData.get('firstName')),
+        name: String(formData.get('firstName')),
         lastName: String(formData.get('lastName')),
-        email: String(formData.get('mail')),
         tel: String(formData.get('contact')),
+        email: String(formData.get('mail')),
         password: bcryptjs.hashSync(String(formData.get('pwd')), salt),
     }
 
@@ -45,10 +45,10 @@ export async function updateUserAction(id: string, formData: FormData) {
 
     if (id) {
         const data = {
-            firstName: String(formData.get('firstName')),
+            name: String(formData.get('firstName')),
             lastName: String(formData.get('lastName')),
+            tel: String(formData.get('contact')),
             email: String(formData.get('mail')),
-            contact: String(formData.get('contact')),
         }
         const user = await prisma.user.update({
             data: data,
