@@ -1,20 +1,9 @@
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
-import { z } from 'zod'
+import { string, z } from 'zod'
 import { prisma } from './prisma';
-import bcryptjs from 'bcryptjs'
+import { compare } from 'bcryptjs'
 import { PrismaAdapter } from "@auth/prisma-adapter"
-
-async function getUser(email: string) {
-    try {
-        const user = prisma.members.findMany({
-            where: { email: email }
-        })
-        return user
-    } catch (error) {
-        throw new Error('not user matching')
-    }
-}
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
     adapter: PrismaAdapter(prisma),
@@ -25,12 +14,16 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 password: {}
             },
             authorize: async (credentials) => {
-                const email = "idiot@gmail.com"
-                const password = "1234"
-                if (credentials.email === email && credentials.password === password) {
-                    return {
-                        email,
-                        password
+                const parsedCredentials = z
+                    .object({ email: z.string().email(), password: z.string().min(4) })
+                    .safeParse(credentials)
+                if (parsedCredentials.success) {
+                    const { email, password } = parsedCredentials.data
+                    const user = await prisma.user.findUnique({ where: { email: email } })
+                    if (user) {
+                        const userMatched = compare(password, String(user.password))
+                        if (!userMatched) return null
+                        return user
                     }
                 }
             }
