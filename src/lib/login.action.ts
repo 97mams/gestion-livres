@@ -10,7 +10,12 @@ export async function authenticate(
 
 
     try {
-        await signIn('credentials', formData);
+        await signIn(
+            'credentials',
+            {
+                redirect: false,
+                formData
+            },);
     } catch (error) {
         console.log(error);
 

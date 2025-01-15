@@ -5,7 +5,7 @@ import { useState } from "react"
 import { deletedUserAction, updateUserAction } from '../lib/user.action';
 import { redirect } from 'next/navigation';
 
-export function Modal(props: { id: number }) {
+export function Modal(props: { id: string }) {
     const [showAction, setShowAction] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const onDeleteUser = () => {

@@ -1,9 +1,12 @@
 import { LoginForm } from "@/src/components/login-form"
 import { auth } from "@/src/lib/auth"
+import { redirect } from "next/navigation"
 
 export default async function Page() {
     const session = await auth()
-    console.log(session?.user?.email);
+    if (session) {
+        redirect('/')
+    }
 
     return (
         < main className="flex items-center justify-center md:h-screen" >
