@@ -17,7 +17,12 @@ export async function Header() {
                         <a href="/">Home</a>
                         <a href="/book/lists">Liste</a>
                         {session ?
-                            <LogOut /> : ''}
+                            <div className="flex gap-2">
+                                <LogOut />
+                                <img src={faker.image.avatar()} alt="faker.image.avatar()" className="w-10 h-10 rounded-full" />
+                            </div>
+                            : <a className="px-3 py-2 border border-foreground hover:outline hover:outline-primary rounded-xl" href="/login">Se connecter</a>}
+
                     </div>
                 </div >
             </div >
