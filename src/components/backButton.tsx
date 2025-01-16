@@ -1,14 +1,15 @@
 "use client"
 
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
-import Router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export function BackButton() {
+    const router = useRouter()
     const backPage = () => {
-        Router.back()
+        router.back()
     }
     return (
-        <button onClick={backPage} className='cursor-pointer mb-3 px-2 py-1 hover:px-1 border border-border rounded-xl'>
+        <button onClick={backPage} className='cursor-pointer mb-3 px-2 py-1 hover:px-1 border hover:shadow-lg hover:shadow-primary border-border rounded-xl'>
             <KeyboardBackspaceOutlinedIcon /> retour
         </button>
     )
