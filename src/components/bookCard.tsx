@@ -5,9 +5,6 @@ export function BookCard(props: {
     author: string,
     date?: string
 }) {
-
-    console.log(props.image);
-
     return (
         <div className="max-w-60 bg-card shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
             <img src={`/uploads/${props.image}`}
