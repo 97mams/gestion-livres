@@ -1,22 +1,26 @@
 import { prisma } from "@/src/lib/prisma"
 import { ListBook } from '@/src/components/listBook'
 import { BackButton } from "@/src/components/backButton"
+import { auth } from "@/src/lib/auth"
+import { redirect } from "next/navigation"
 
 export default async function Page(props: {
     params: Promise<{
         bookId: number
     }>
 }) {
-    const id = Number((await props.params).bookId)
+    const session = await auth()
+    if (!session) {
+        redirect('/login')
+    }
 
+    const id = Number((await props.params).bookId)
     const book = await prisma.books.findUnique({
         where: {
             id: id
         }
     })
-
     let genre = ""
-
     if (book) {
         genre = book.types
     }
@@ -25,7 +29,6 @@ export default async function Page(props: {
             types: genre
         }
     })
-
     const bookRender = books.filter(b => b.id !== book?.id)
 
     return (
@@ -59,10 +62,9 @@ export default async function Page(props: {
                     </div>
                     <h3 className="font-black text-forground md:text-3xl text-xl">{book?.title}</h3>
                     <p className="md:text-lg text-gray-500 text-base">{book?.resume}</p>
-                    {/* <p className="text-xl font-black text-gray-800">
-                        $110
-                        <span className="font-normal text-gray-600 text-base">/night</span>
-                    </p> */}
+                    <div>
+                        <button className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">Prendre</button>
+                    </div>
                 </div>
             </div>
             <ListBook data={bookRender} title="Même genre" />

@@ -6,6 +6,7 @@ import { LogOut } from "./logout"
 
 export async function Header() {
     const session = await auth()
+    const email: string = String(session?.user?.email)
 
     return (
         <nav className="sticky top-0 z-10 bg-accent text-foreground">
@@ -13,12 +14,12 @@ export async function Header() {
                 < div className="flex items-center justify-between h-16" >
                     <span className="text-2xl font-semibold">Boky</span>
                     <div className="flex space-x-4 items-baseline">
-                        <a href="/">Home</a>
-                        <a href="/book/lists">Liste</a>
                         {session ?
-                            <div className="flex gap-2">
+                            <div className="flex gap-2 items-center">
+                                <a href="/">Home</a>
+                                <a href="/book/lists">Liste</a>
                                 <LogOut />
-                                <Avatar email={session.user?.email} />
+                                <Avatar email={email} />
                             </div>
                             : <a className="px-3 py-2 border border-foreground hover:outline hover:outline-primary rounded-xl" href="/login">Se connecter</a>}
 

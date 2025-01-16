@@ -4,6 +4,8 @@ import "./globals.css";
 import { Header } from "@/src/components/header";
 import { SideBar } from "@/src/components/sideBar";
 import { prisma } from "@/src/lib/prisma";
+import { auth } from "@/src/lib/auth";
+import { redirect } from "next/navigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,7 +28,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
+  const session = await auth()
 
   const genres = await prisma.books.findMany({
     select: {
@@ -45,7 +47,7 @@ export default async function RootLayout({
         <div className="w-full h-screen max-h-screen">
           <Header />
           <div className="w-full px-20 flex items-start">
-            <SideBar items={data} />
+            {session ? <SideBar items={data} /> : ''}
             <div className="flex h-full w-full justify-center overflow-scroll">
               {children}
             </div>
