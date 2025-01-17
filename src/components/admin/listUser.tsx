@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { Modal } from "@/src/components/modal"
 
 interface user {
-    id: number,
+    id: string,
     name: string,
     lastName: string,
     email: string,
