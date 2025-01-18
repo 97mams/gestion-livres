@@ -13,8 +13,9 @@ export async function CreateEmprunteAction(email: string, bookId: number) {
                     userId: user.id
                 }
             })
+            return true
         } else {
-            console.log('efa nalaina io e');
+            return false
 
         }
     }

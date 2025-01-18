@@ -1,9 +1,8 @@
 "use client"
 
-import { auth } from "../lib/auth";
+import { useState } from "react";
 import { CreateEmprunteAction } from "../lib/emprunte.action";
-import { prisma } from "../lib/prisma";
-import { Modal } from "./modal";
+import { toast } from "sonner"
 
 type bookType = {
     title: string;
@@ -60,12 +59,21 @@ export function BookCardDetail({ book, email }: { book: bookType | null, email: 
 }
 
 const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: string }) => {
+    const [e, setE] = useState<boolean>(true)
     const handlerEmprunte = async () => {
-        await CreateEmprunteAction(email, Number(bookId))
+        const emprunt = await CreateEmprunteAction(email, Number(bookId))
+        if (emprunt !== undefined) setE(emprunt)
+        if (emprunt) {
+            toast.success("bonne lécture")
+        } else {
+            toast.error("livre déjas pris!")
+        }
     }
     return (
         <button
             onClick={handlerEmprunte}
-            className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">Prendre</button>
+            className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
+            {e ? 'mety' : "tsy mety"}
+        </button>
     )
 }

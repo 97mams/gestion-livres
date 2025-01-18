@@ -5,7 +5,7 @@ import { Header } from "@/src/components/header";
 import { SideBar } from "@/src/components/sideBar";
 import { prisma } from "@/src/lib/prisma";
 import { auth } from "@/src/lib/auth";
-import { redirect } from "next/navigation";
+import { Toaster } from 'sonner';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -50,6 +50,7 @@ export default async function RootLayout({
             {session ? <SideBar items={data} /> : ''}
             <div className="flex h-full w-full justify-center overflow-scroll">
               {children}
+              <Toaster />
             </div>
           </div>
         </div>
