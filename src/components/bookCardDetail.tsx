@@ -2,6 +2,7 @@
 
 import { auth } from "../lib/auth";
 import { CreateEmprunteAction } from "../lib/emprunte.action";
+import { prisma } from "../lib/prisma";
 import { Modal } from "./modal";
 
 type bookType = {
@@ -17,7 +18,7 @@ type bookType = {
     updatedAt: Date;
 }
 
-export function BookCardDetail({ book, userId }: { book: bookType | null, userId: string }) {
+export function BookCardDetail({ book, email }: { book: bookType | null, email: string }) {
     return (
         <div
             className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-border bg-card">
@@ -50,7 +51,7 @@ export function BookCardDetail({ book, userId }: { book: bookType | null, userId
                 <div>
                     <ButtonEmprunte
                         bookId={book?.id}
-                        userId={userId}
+                        email={email}
                     />
                 </div>
             </div>
@@ -58,16 +59,9 @@ export function BookCardDetail({ book, userId }: { book: bookType | null, userId
     )
 }
 
-const ButtonEmprunte = ({ bookId, userId }: { bookId: number | undefined, userId: string }) => {
+const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: string }) => {
     const handlerEmprunte = async () => {
-        if (bookId && userId) {
-            const emprunte = await CreateEmprunteAction(userId, bookId)
-            if (emprunte) {
-                alert('mety ehhh')
-            }
-        }
-
-        console.log(bookId, userId)
+        await CreateEmprunteAction(email, Number(bookId))
     }
     return (
         <button

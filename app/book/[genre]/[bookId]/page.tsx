@@ -35,7 +35,7 @@ export default async function Page(props: {
     return (
         <div className="p-8 w-full">
             <BackButton />
-            <BookCardDetail userId={String(session.user?.id)} book={book} />
+            <BookCardDetail email={String(session.user?.email)} book={book} />
             <ListBook data={bookRender} title="Même genre" />
         </div>
     )
