@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreateEmprunteAction } from "../lib/emprunte.action";
 import { toast } from "sonner"
+import { prisma } from "../lib/prisma";
 
 type bookType = {
     title: string;
@@ -60,6 +61,13 @@ export function BookCardDetail({ book, email }: { book: bookType | null, email: 
 
 const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: string }) => {
     const [e, setE] = useState<boolean>(true)
+
+    useEffect(() => {
+        async () => {
+            const emprunt = await prisma.emprunts.findUnique({ where: { email: email } })
+        }
+    }, [])
+
     const handlerEmprunte = async () => {
         const emprunt = await CreateEmprunteAction(email, Number(bookId))
         if (emprunt !== undefined) setE(emprunt)
