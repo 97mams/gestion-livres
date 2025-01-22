@@ -63,3 +63,13 @@ export async function deletedBookAction(id: number) {
     }
     return null
 }
+
+export async function checkedUserWithBook(bookId: number | undefined, userEmail: string): Promise<boolean> {
+    const user = await prisma.user.findFirst({ where: { email: userEmail } })
+    const emprunts = await prisma.emprunts.findFirst({ where: { bookId } })
+    if (emprunts && user?.id === emprunts.userId) {
+        return true
+    }
+
+    return false
+}
