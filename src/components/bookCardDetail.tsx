@@ -18,7 +18,12 @@ type bookType = {
     updatedAt: Date;
 }
 
-export function BookCardDetail({ book, email }: { book: bookType | null, email: string }) {
+export function BookCardDetail(
+    {
+        book, email, etat
+    }: {
+        book: bookType | null, email: string, etat: boolean
+    }) {
     return (
         <div
             className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-border bg-card">
@@ -52,6 +57,7 @@ export function BookCardDetail({ book, email }: { book: bookType | null, email: 
                     <ButtonEmprunte
                         bookId={book?.id}
                         email={email}
+                        etat={etat}
                     />
                 </div>
             </div>
@@ -59,18 +65,11 @@ export function BookCardDetail({ book, email }: { book: bookType | null, email: 
     )
 }
 
-const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: string }) => {
-    const [e, setE] = useState<boolean>(true)
-
-    useEffect(() => {
-        async () => {
-            const emprunt = await prisma.emprunts.findUnique({ where: { email: email } })
-        }
-    }, [])
+const ButtonEmprunte = ({ bookId, email, etat }: { bookId: number | undefined, email: string, etat: boolean }) => {
+    const [e, setE] = useState<boolean>(etat)
 
     const handlerEmprunte = async () => {
         const emprunt = await CreateEmprunteAction(email, Number(bookId))
-        if (emprunt !== undefined) setE(emprunt)
         if (emprunt) {
             toast.success("bonne lécture")
         } else {
@@ -78,10 +77,20 @@ const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: 
         }
     }
     return (
-        <button
-            onClick={handlerEmprunte}
-            className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
-            {e ? 'mety' : "tsy mety"}
-        </button>
+        <div>
+            {
+                e ?
+                    <button
+                        onClick={handlerEmprunte}
+                        className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
+                        annuler
+                    </button> :
+                    <button
+                        onClick={handlerEmprunte}
+                        className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
+                        prendre
+                    </button>
+            }
+        </div>
     )
 }
