@@ -27,3 +27,8 @@ const checkUniqueEmprunt = async (user: string, bookId: number): Promise<boolean
     if (empruntsCurrent[0]) return true
     return false
 }
+
+export async function deleteEmpruntAction(id: number) {
+    console.log(id);
+
+}
