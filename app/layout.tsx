@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Header } from "@/src/components/header";
+import { Footer } from "@/src/components/footer";
 import { SideBar } from "@/src/components/sideBar";
 import { prisma } from "@/src/lib/prisma";
 import { auth } from "@/src/lib/auth";
@@ -46,13 +47,14 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} `}>
         <div className="w-full h-screen max-h-screen">
           <Header />
-          <div className="w-full overflow-auto px-20 flex items-start">
+          <div className="w-full px-20 flex items-start">
             {session ? <SideBar items={data} /> : ''}
             <div className="flex h-full w-full justify-center overflow-scroll">
               {children}
               <Toaster />
             </div>
           </div>
+          <Footer />
         </div>
       </body>
     </html>
