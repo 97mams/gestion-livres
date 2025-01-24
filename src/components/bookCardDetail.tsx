@@ -76,12 +76,15 @@ const ButtonEmprunte = ({ bookId, email, etat }: { bookId: number | undefined, e
             toast.error("livre déjas pris!")
         }
     }
+    const handlerDelete = async () => {
+        toast.warning('Deleted')
+    }
     return (
         <div>
             {
                 e ?
                     <button
-                        onClick={handlerEmprunte}
+                        onClick={handlerDelete}
                         className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
                         annuler
                     </button> :
