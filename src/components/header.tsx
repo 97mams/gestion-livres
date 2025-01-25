@@ -18,7 +18,6 @@ export async function Header() {
                             <div className="flex gap-2 items-center">
                                 <a href="/">Home</a>
                                 <a href="/book/lists">Liste</a>
-                                <LogOut />
                                 <Avatar email={email} />
                             </div>
                             : <a className="px-3 py-2 border border-foreground hover:outline hover:outline-primary rounded-xl" href="/login">Se connecter</a>}
