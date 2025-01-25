@@ -15,7 +15,7 @@ export async function Header() {
                     <span className="text-2xl font-semibold">Boky</span>
                     <div className="flex space-x-4 items-baseline">
                         {session ?
-                            <div className="flex gap-2 items-center">
+                            <div className="flex gap-4 items-center">
                                 <a href="/">Home</a>
                                 <a href="/book/lists">Liste</a>
                                 <Avatar email={email} />

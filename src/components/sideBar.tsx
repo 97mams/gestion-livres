@@ -2,22 +2,14 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { path } from "../lib/pathHelper";
 
 export function SideBar(props: { items: String[] }) {
     const pathname: string = usePathname()
     const active: string = "line-through"
     const chechItem = (item: String) => {
         const text = item.split(' ')
-        console.log(text);
         return text[0]
-    }
-
-    const path = (item: String) => {
-        if (item.includes(' ')) {
-            const text = item.split(' ')
-            return text[0] + '_' + text[1]
-        }
-        return item
     }
 
     return (

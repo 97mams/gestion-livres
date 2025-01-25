@@ -7,6 +7,7 @@ import { SideBar } from "@/src/components/sideBar";
 import { prisma } from "@/src/lib/prisma";
 import { auth } from "@/src/lib/auth";
 import { Toaster } from 'sonner';
+import { EmpruntCurrent } from "@/src/components/empruntCurrent";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -45,16 +46,17 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} `}>
-        <div className="w-full h-screen max-h-screen">
+        <div className="w-full h-screen max-h-screen overflow-hidden">
           <Header />
-          <div className="w-full px-20 flex items-start">
+          <div className="w-full flex items-start pl-8">
             {session ? <SideBar items={data} /> : ''}
-            <div className="flex h-full w-full justify-center overflow-scroll">
+            <div className="flex h-screen w-full justify-center overflow-scroll">
               {children}
-              <Toaster />
             </div>
+            {/* {session ? <EmpruntCurrent /> : ''} */}
           </div>
           <Footer />
+          <Toaster />
         </div>
       </body>
     </html>
