@@ -2,12 +2,13 @@
 
 import { signOut } from "next-auth/react"
 
-export function LogOut() {
+export function LogOut(props: { classname: string }) {
     const handelSingOut = async () => {
+        alert("click")
         await signOut()
     }
 
     return (
-        <button onClick={handelSingOut} type="button" className="px-3 rounded-xl py-2 border border-blue-500">deconnecter</button>
+        <a onClick={handelSingOut} className={props.classname + ' cursor-pointer'}> Se deconnecter</a >
     )
 }
