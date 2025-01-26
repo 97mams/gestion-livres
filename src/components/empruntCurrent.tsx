@@ -17,7 +17,7 @@ export async function EmpruntCurrent() {
     console.log(empruntCurrent);
 
     return (
-        <div className="w-60 border-l h-screen px-4 fixed right-0 border-r-gray-700">
+        <div className="w-60 border-l h-screen px-5  right-0 border-r-gray-700">
             <h1 className="flex justify-between items-baseline mt-8 text-xl font-bold">
                 Livres
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-pink-500" viewBox="0 0 20 20" fill="currentColor">

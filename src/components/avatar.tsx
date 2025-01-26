@@ -42,7 +42,7 @@ export function Avatar(props: { email: string }) {
                 ref={ref}
             />
             {drop ?
-                <div className="h-47 bg-card-foreground border border-card w-72 rounded-xl absolute right-36 top-16">
+                <div className="h-47 bg-card-foreground border border-card w-72 rounded-xl absolute right-8 top-16">
                     <div className="flex flex-col text-card p-2 gap-2">
                         <a className='p-2 hover:bg-card rounded-xl hover:text-foreground' href="/emprunt">dasbord</a>
                         <a className='p-2 hover:bg-card rounded-xl hover:text-foreground' href="#">Profile</a>

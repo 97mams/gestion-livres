@@ -12,11 +12,11 @@ export default async function Page() {
   })
   return (
     <div className="w-full p-4 flex">
-      <div className="mr-[15rem] flex flex-col gap-3 ">
+      <div className="flex flex-col gap-3 ">
         <ListBook data={recentBook} title="Nouveaux livres" />
         <ListBook data={allBook} title="Touts livres" />
       </div>
-      {session ? <EmpruntCurrent /> : ''}
+      {/* {session ? <EmpruntCurrent /> : ''} */}
     </div>
   )
 }
