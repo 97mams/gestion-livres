@@ -25,7 +25,7 @@ export async function createBookAction(book: {
             fs.mkdirSync(UPLOAD_DIR)
         }
 
-        console.log((file as File).name)
+        // console.log((file as File).name)
 
         fs.writeFileSync(path.resolve(UPLOAD_DIR, (file as File).name), buffer)
         const newBook = await prisma.books.create({

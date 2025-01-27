@@ -1,20 +1,38 @@
+"use client"
+
 import { auth } from "../lib/auth"
 import { prisma } from "../lib/prisma"
 import { path } from "../lib/pathHelper"
+import { useEffect, useState } from "react"
 
-export async function EmpruntCurrent() {
-    const userEmail = (await auth())?.user?.email
-    const empruntCurrent = await prisma.emprunts.findMany({
-        where: {
-            user: {
-                email: userEmail
-            }
-        },
-        include: {
-            book: true
-        }
-    })
-    console.log(empruntCurrent);
+type emprunt =
+    {
+        book: {
+            id: number;
+            createdAt: Date;
+            updatedAt: Date;
+            title: string;
+            author: string;
+            types: string;
+            resume: string;
+            upvotes: number;
+            mockupImages: string;
+            date_publish: string;
+        };
+    }
+
+
+export function EmpruntCurrent() {
+    const [emprunt, setEmprunt] = useState<emprunt[]>()
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:3000/api/emprunts?userEmail=mamiso@gmail.com")
+            .then(resp => resp.json())
+            .then(data => {
+                setEmprunt(data)
+            })
+    }, [])
+
 
     return (
         <div className="w-60 border-l h-screen px-5  right-0 border-r-gray-700">
@@ -27,9 +45,9 @@ export async function EmpruntCurrent() {
                 </svg></h1>
             <ul>
                 {
-                    empruntCurrent.map((emprunts) => (
-                        <li key={emprunts.id} className="w-full list-disc">
-                            <a href={`/book/${path(emprunts.book.types)}/${emprunts.bookId}`}>
+                    emprunt?.map((emprunts) => (
+                        <li key={emprunts.book.id} className="w-full list-disc">
+                            <a href={`/book/${path(emprunts.book.types)}/${emprunts.book.title}`}>
                                 {emprunts.book.title}
                             </a>
                         </li>

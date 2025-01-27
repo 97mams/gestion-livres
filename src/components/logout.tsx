@@ -4,7 +4,6 @@ import { signOut } from "next-auth/react"
 
 export function LogOut(props: { classname: string }) {
     const handelSingOut = async () => {
-        alert("click")
         await signOut()
     }
 
