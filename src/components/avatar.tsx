@@ -4,6 +4,8 @@ import { useEffect, useRef, useMemo, useState } from 'react';
 import { createAvatar } from '@dicebear/core';
 import { lorelei } from '@dicebear/collection';
 import { LogOut } from './logout';
+import PersonIcon from '@mui/icons-material/Person';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 export function Avatar(props: { email: string }) {
     const [drop, setDrop] = useState(false)
@@ -44,8 +46,14 @@ export function Avatar(props: { email: string }) {
             {drop ?
                 <div className="h-47 bg-card-foreground border border-card w-72 rounded-xl absolute right-8 top-16">
                     <div className="flex flex-col text-card p-2 gap-2">
-                        <a className='p-2 hover:bg-card rounded-xl hover:text-foreground' href="/emprunt">dasbord</a>
-                        <a className='p-2 hover:bg-card rounded-xl hover:text-foreground' href="#">Profile</a>
+                        <a className='p-2 hover:bg-card rounded-xl hover:text-foreground' href="/emprunt">
+                            <BarChartIcon />
+                            dasbord
+                        </a>
+                        <a className='p-2 hover:bg-card rounded-xl hover:text-foreground' href="#">
+                            <PersonIcon />
+                            Profile
+                        </a>
                         <LogOut classname='p-2 hover:bg-card rounded-xl hover:text-foreground' />
                     </div>
 

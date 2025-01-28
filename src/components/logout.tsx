@@ -1,6 +1,7 @@
 "use client"
 
 import { signOut } from "next-auth/react"
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export function LogOut(props: { classname: string }) {
     const handelSingOut = async () => {
@@ -8,6 +9,9 @@ export function LogOut(props: { classname: string }) {
     }
 
     return (
-        <a onClick={handelSingOut} className={props.classname + ' cursor-pointer'}> Se deconnecter</a >
+        <a onClick={handelSingOut} className={props.classname + ' cursor-pointer'}>
+            <LogoutIcon />
+            Se deconnecter
+        </a >
     )
 }

@@ -53,7 +53,7 @@ export default async function RootLayout({
             <div className="flex h-screen w-full justify-center overflow-scroll">
               {children}
             </div>
-            {/* {session ? <EmpruntCurrent /> : ''} */}
+            {session ? <EmpruntCurrent userEmail={session?.user?.email} /> : ''}
           </div>
           <Footer />
           <Toaster />
