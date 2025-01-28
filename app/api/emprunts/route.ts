@@ -1,42 +1,38 @@
+import { prisma } from '@/src/lib/prisma';
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
 
-// Créer un nouvel emprunt
 export async function POST(request: Request) {
     try {
-        const { utilisateurEmail, livreId } = await request.json();
+        const { userEmail, bookId } = await request.json();
 
-        // Vérifie si l'utilisateur existe
-        const utilisateur = await prisma.utilisateur.findUnique({
-            where: { email: utilisateurEmail },
+        const user = await prisma.user.findUnique({
+            where: { email: userEmail },
         });
 
-        if (!utilisateur) {
+        if (!user) {
             return NextResponse.json(
-                { error: 'Utilisateur non trouvé' },
+                { error: 'no user matched' },
                 { status: 404 }
             );
         }
 
-        // Vérifie si le livre existe
-        const livre = await prisma.livre.findUnique({
-            where: { id: livreId },
+
+        const book = await prisma.books.findUnique({
+            where: { id: bookId },
         });
 
-        if (!livre) {
+        if (!book) {
             return NextResponse.json(
-                { error: 'Livre non trouvé' },
+                { error: 'no books mached' },
                 { status: 404 }
             );
         }
 
-        // Crée l'emprunt
-        const emprunt = await prisma.emprunt.create({
+        const emprunt = await prisma.emprunts.create({
             data: {
-                utilisateurId: utilisateur.id,
-                livreId: livre.id,
+                userId: user.id,
+                bookId: book.id,
             },
         });
 
@@ -49,36 +45,34 @@ export async function POST(request: Request) {
     }
 }
 
-// Lister les emprunts filtrés par l'email de l'utilisateur
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url);
-        const utilisateurEmail = searchParams.get('email');
+        const userEmail = searchParams.get('email');
+        console.log(userEmail);
 
-        if (!utilisateurEmail) {
+        if (!userEmail) {
             return NextResponse.json(
-                { error: 'Le paramètre "email" est requis' },
+                { error: 'error parameters' },
                 { status: 400 }
             );
         }
 
-        // Récupère les emprunts de l'utilisateur
-        const emprunts = await prisma.emprunt.findMany({
+        const emprunts = await prisma.emprunts.findMany({
             where: {
-                utilisateur: {
-                    email: utilisateurEmail,
+                user: {
+                    email: userEmail,
                 },
             },
             include: {
-                livre: true, // Inclut les détails du livre
-                utilisateur: true, // Inclut les détails de l'utilisateur
+                book: true,
             },
         });
 
         return NextResponse.json(emprunts, { status: 200 });
     } catch (error) {
         return NextResponse.json(
-            { error: 'Erreur lors de la récupération des emprunts' },
+            { error: 'Error geting emprunt' },
             { status: 500 }
         );
     }
