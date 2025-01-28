@@ -10,8 +10,8 @@ export function LogOut(props: { classname: string }) {
 
     return (
         <a onClick={handelSingOut} className={props.classname + ' cursor-pointer'}>
-            <LogoutIcon />
             Se deconnecter
+            <LogoutIcon />
         </a >
     )
 }
