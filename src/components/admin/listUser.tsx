@@ -1,7 +1,7 @@
 "use client"
 
 import { Table, TableBody, TableHeader, TableTd, TableTh, TableTr } from "@/src/components/table"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Modal } from "@/src/components/modal"
 
 interface user {
@@ -14,15 +14,15 @@ interface user {
 
 export function ListUser() {
     const [users, setUsers] = useState<user[]>()
-    const title: string[] = ["id", "Nom", "Prénoms", "Mail", "Tel"]
+    const title: string[] = ["Nom", "Prénoms", "Mail", "Tel"]
 
     useEffect(() => {
-        fetch('http://127.0.0.1:3000/api/admin/users')
+        fetch('/api/admin/users')
             .then((res) => res.json())
             .then((data) => {
                 setUsers(data.members)
             })
-    }, [])
+    }, [users])
 
     return (
         <div className="w-full">
@@ -35,7 +35,6 @@ export function ListUser() {
                 <TableBody>
                     {users?.map(user => (
                         <TableTr key={user.id}>
-                            <TableTd>{user.id}</TableTd>
                             <TableTd>{user.name}</TableTd>
                             <TableTd>{user.lastName}</TableTd>
                             <TableTd>{user.email}</TableTd>
