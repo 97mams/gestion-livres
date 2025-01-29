@@ -4,6 +4,7 @@ import { createBookAction } from "@/src/lib/book.action"
 import { CreateUserAction, updateUserAction } from "@/src/lib/user.action"
 import { useFormStatus } from "react-dom"
 import { SubmitButton } from "./SubmitButton"
+import { toast } from "sonner"
 
 export function FormAction() {
 
@@ -36,22 +37,23 @@ export function FormAction() {
     )
 }
 
-type membre = {
-    id: number,
+type user = {
+    id: string,
     firstName: string,
     lastName: string,
     email: string,
-    contact: string
+    tel: string
+    password: string,
     status: boolean
 }
 
-export function UserForm({ data }: { data?: membre | null }) {
+export function UserForm({ data }: { data?: user | null }) {
 
     const onSubmit = async (formData: FormData) => {
         if (data) {
-            await updateUserAction(data.id, formData)
+            if (await updateUserAction(data.id, formData)) toast.success(` ajout reussi`)
         } else {
-            await CreateUserAction(formData)
+            if (await CreateUserAction(formData)) toast.success(` ajout reussi`)
         }
     }
     const { pending } = useFormStatus()
@@ -65,8 +67,8 @@ export function UserForm({ data }: { data?: membre | null }) {
             <Input dValue={data?.firstName} className="w-full" name="firstName" id="first-name" children="Nom" placeholder="votre nom" />
             <Input dValue={data?.lastName} className="w-full" name="lastName" id="last-name" children="Prénoms" placeholder="votre prenom" />
             <Input dValue={data?.email} className="w-full" name="mail" id="e-mail" children="E-mail" type="mail" placeholder="exemple@gmail.com" />
-            <Input dValue={data?.contact} className="w-full" name="contact" id="contact" children="Téléphone" placeholder="numéro téléphone" />
-            <Input dValue={data?.contact} type="password" className="w-full" name="pwd" id="pwd" children="Mot de passe" placeholder="mot de passe" />
+            <Input dValue={data?.tel} className="w-full" name="contact" id="contact" children="Téléphone" placeholder="numéro téléphone" />
+            <Input dValue={data?.password} type="password" className="w-full" name="pwd" id="pwd" children="Mot de passe" placeholder="mot de passe" />
             <SubmitButton pending={pending} text={data ? "Modifier" : "Ajouter"} />
         </form>
     )
