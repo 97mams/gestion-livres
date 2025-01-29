@@ -19,9 +19,9 @@ export async function CreateUserAction(formData: FormData) {
     })
 
     if (user) {
-        redirect("/admin/users/new")
+        return true
     }
-    throw new Error("user add fail")
+    return false
 
 }
 
@@ -57,10 +57,7 @@ export async function updateUserAction(id: string, formData: FormData) {
             }
         })
 
-        if (user) {
-            redirect('/admin/users/lists')
-        } else {
-            throw new Error('updated faild')
-        }
+        if (user) return true
+        return false
     }
 } 

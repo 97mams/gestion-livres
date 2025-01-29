@@ -1,13 +1,25 @@
 "use client";
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { deletedUserAction, updateUserAction } from '../lib/user.action';
 import { redirect } from 'next/navigation';
 
 export function Modal(props: { id: string }) {
     const [showAction, setShowAction] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const ref = useRef<HTMLButtonElement>(null)
+    useEffect(() => {
+        const handleOutClick = (e: MouseEvent) => {
+            if (!ref.current?.contains(e.target as Node)) {
+                setShowAction(false)
+            }
+        }
+
+        window.addEventListener('click', handleOutClick)
+
+        return () => { window.removeEventListener('click', handleOutClick) }
+    }, [ref])
     const onDeleteUser = () => {
         setShowModal(!showModal)
         setShowAction(!showAction)
@@ -32,14 +44,14 @@ export function Modal(props: { id: string }) {
 
     return (
         <div>
-            <button onClick={() => { setShowAction(!showAction) }}>
+            <button ref={ref} onClick={() => { setShowAction(!showAction) }}>
                 <MoreVertIcon />
             </button>
             {
-                showAction ? <div className='w-24 py-2 flex flex-col rounded items-start border bg-slate-500 border-border absolute right-32 z-50'>
-                    <p onClick={onDeleteUser} className='cursor-pointer w-full hover:bg-primary text-start px-2'>Suprimer</p>
-                    <p onClick={onDetail} className='w-full hover:bg-primary cursor-pointer text-start px-2'>Detail</p>
-                    <p onClick={onUpdated} className='cursor-pointer w-full hover:bg-primary text-start px-2'>Modifier</p>
+                showAction ? <div className='w-24 rounded-[5px] flex flex-col items-start border bg-foreground text-card border-border absolute'>
+                    <p onClick={onDeleteUser} className=' p-1 cursor-pointer w-full hover:bg-card hover:text-foreground text-start px-2'>Suprimer</p>
+                    <p onClick={onDetail} className='p-1 w-full  hover:bg-card hover:text-foreground cursor-pointer text-start px-2'>Detail</p>
+                    <p onClick={onUpdated} className='p-1 cursor-pointer w-full  hover:bg-card hover:text-foreground text-start px-2'>Modifier</p>
                 </div> : ""
             } {
                 showModal ? <div id="static-modal" data-modal-backdrop="static" tabIndex={-1} aria-hidden="true" className="flex overflow-y-auto bg-white/15 overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" >
