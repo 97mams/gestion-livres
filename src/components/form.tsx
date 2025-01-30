@@ -5,9 +5,9 @@ import { CreateUserAction, updateUserAction } from "@/src/lib/user.action"
 import { useFormStatus } from "react-dom"
 import { SubmitButton } from "./SubmitButton"
 import { toast } from "sonner"
+import { CreateEmprunteAction } from "../lib/emprunte.action"
 
 export function FormAction() {
-
     const onSubmit = async (formData: FormData) => {
         await createBookAction({
             title: String(formData.get('title')),
@@ -48,6 +48,7 @@ type user = {
 }
 
 export function UserForm({ data }: { data?: user | null }) {
+    const { pending } = useFormStatus()
 
     const onSubmit = async (formData: FormData) => {
         if (data) {
@@ -56,7 +57,6 @@ export function UserForm({ data }: { data?: user | null }) {
             if (await CreateUserAction(formData)) toast.success(` ajout reussi`)
         }
     }
-    const { pending } = useFormStatus()
 
 
     return (
@@ -74,3 +74,17 @@ export function UserForm({ data }: { data?: user | null }) {
     )
 }
 
+export const FormEmprunt = ({ userEmail, bookId }: { userEmail: string, bookId: number | undefined }) => {
+    const { pending } = useFormStatus()
+
+    const handleSubmit = async (formData: FormData) => {
+        if (bookId) CreateEmprunteAction(userEmail, bookId)
+    }
+
+    return (
+        <form action={handleSubmit}>
+            <Input type="date" placeholder="limite d'emprunt" name="dateLimit" />
+            <SubmitButton pending={pending} text="confirmer" classname="text-sm" />
+        </form>
+    )
+}
