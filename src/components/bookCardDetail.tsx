@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { CreateEmprunteAction } from "../lib/emprunte.action";
 import { toast } from "sonner"
-import { prisma } from "../lib/prisma";
+import { FormEmprunt } from "./form";
 
 type bookType = {
     title: string;
@@ -67,6 +67,7 @@ export function BookCardDetail(
 
 const ButtonEmprunte = ({ bookId, email, etat }: { bookId: number | undefined, email: string, etat: boolean }) => {
     const [e, setE] = useState<boolean>(etat)
+    const [showCardConfirm, setCardConfirm] = useState(false)
 
     const handlerEmprunte = async () => {
         const emprunt = await CreateEmprunteAction(email, Number(bookId))
@@ -77,23 +78,46 @@ const ButtonEmprunte = ({ bookId, email, etat }: { bookId: number | undefined, e
         }
     }
     const handlerDelete = async () => {
-        toast.warning('Deleted')
+    }
+
+    const canceledCard = () => {
+        setCardConfirm(!showCardConfirm)
     }
     return (
         <div>
-            {
-                e ?
-                    <button
-                        onClick={handlerDelete}
-                        className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
-                        annuler
-                    </button> :
-                    <button
-                        onClick={handlerEmprunte}
-                        className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
-                        prendre
-                    </button>
-            }
+            {showCardConfirm ?
+                <div className="w-72 pt-2 bg-card border border-border rounded-[8px] absolute bottom-5">
+                    <div className="w-full flex justify-end px-2">
+                        <button
+                            onClick={canceledCard}
+                            className="px-4  py-2 border border-border rounded-[8px] hover:bg-primary/20 text-sm"
+                        >
+                            X
+                        </button>
+                    </div>
+                    <div className="px-4 py-2">
+                        <p>
+                            Ajouter la date de retour
+                        </p>
+                        <FormEmprunt userEmail={email} bookId={bookId} />
+                    </div>
+                </div>
+                : ''}
+            <div>
+                {
+                    e ?
+                        <button
+                            onClick={handlerDelete}
+                            className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
+                            annuler
+                        </button> :
+                        <button
+                            onClick={canceledCard}
+                            className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
+                            prendre
+                        </button>
+                }
+            </div>
         </div>
     )
 }
