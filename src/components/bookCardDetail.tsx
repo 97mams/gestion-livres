@@ -1,9 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { CreateEmprunteAction } from "../lib/emprunte.action";
 import { toast } from "sonner"
 import { FormEmprunt } from "./form";
+import { checkedUserWithBook } from "../lib/book.action";
+import { deleteEmpruntAction } from "../lib/emprunte.action";
 
 type bookType = {
     title: string;
@@ -20,10 +21,11 @@ type bookType = {
 
 export function BookCardDetail(
     {
-        book, email, etat
+        book, email
     }: {
-        book: bookType | null, email: string, etat: boolean
+        book: bookType | null, email: string
     }) {
+
     return (
         <div
             className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-border bg-card">
@@ -57,7 +59,6 @@ export function BookCardDetail(
                     <ButtonEmprunte
                         bookId={book?.id}
                         email={email}
-                        etat={etat}
                     />
                 </div>
             </div>
@@ -65,19 +66,20 @@ export function BookCardDetail(
     )
 }
 
-const ButtonEmprunte = ({ bookId, email, etat }: { bookId: number | undefined, email: string, etat: boolean }) => {
-    const [e, setE] = useState<boolean>(etat)
+const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: string }) => {
     const [showCardConfirm, setCardConfirm] = useState(false)
+    const [changedButton, setChangedButton] = useState<boolean>()
 
-    const handlerEmprunte = async () => {
-        const emprunt = await CreateEmprunteAction(email, Number(bookId))
-        if (emprunt) {
-            toast.success("bonne lécture")
-        } else {
-            toast.error("livre déjas pris!")
-        }
-    }
+    useEffect(() => {
+        const fetch = async () => {
+            const bookEmprunted = await checkedUserWithBook(bookId, email)
+            setChangedButton(bookEmprunted)
+        };
+        fetch()
+    }, [changedButton]);
+
     const handlerDelete = async () => {
+        await deleteEmpruntAction(email)
     }
 
     const canceledCard = () => {
@@ -95,17 +97,17 @@ const ButtonEmprunte = ({ bookId, email, etat }: { bookId: number | undefined, e
                             X
                         </button>
                     </div>
-                    <div className="px-4 py-2">
+                    <div className="px-4 py-2 flex flex-col gap-4">
                         <p>
                             Ajouter la date de retour
                         </p>
-                        <FormEmprunt userEmail={email} bookId={bookId} />
+                        <FormEmprunt onclick={canceledCard} userEmail={email} bookId={bookId} />
                     </div>
                 </div>
                 : ''}
             <div>
                 {
-                    e ?
+                    changedButton ?
                         <button
                             onClick={handlerDelete}
                             className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
