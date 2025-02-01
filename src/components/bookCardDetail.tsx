@@ -79,7 +79,11 @@ const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: 
     }, [changedButton]);
 
     const handlerDelete = async () => {
-        await deleteEmpruntAction(email)
+        if (bookId) await deleteEmpruntAction(email, bookId)
+    }
+
+    const handleState = (state: boolean) => {
+        setChangedButton(state)
     }
 
     const canceledCard = () => {
@@ -101,7 +105,12 @@ const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: 
                         <p>
                             Ajouter la date de retour
                         </p>
-                        <FormEmprunt onclick={canceledCard} userEmail={email} bookId={bookId} />
+                        <FormEmprunt
+                            onclick={canceledCard}
+                            onStatus={handleState}
+                            userEmail={email}
+                            bookId={bookId}
+                        />
                     </div>
                 </div>
                 : ''}
@@ -110,12 +119,13 @@ const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: 
                     changedButton ?
                         <button
                             onClick={handlerDelete}
-                            className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
+                            className="px-3 py-2 border border-secondary rounded text-secondary hover:bg-foreground/20">
                             annuler
-                        </button> :
+                        </button>
+                        :
                         <button
                             onClick={canceledCard}
-                            className="px-3 py-2 border border-secondary rounded text-secondary hover:shadow-md hover:shadow-primary">
+                            className="px-3 py-2 border border-secondary rounded text-secondary hover:bg-foreground/20">
                             prendre
                         </button>
                 }
