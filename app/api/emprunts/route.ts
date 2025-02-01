@@ -59,15 +59,22 @@ export async function GET(request: Request) {
         }
 
         const emprunts = await prisma.emprunts.findMany({
+
             where: {
                 user: {
                     email: userEmail,
                 },
             },
             include: {
-                book: true,
+                book: {
+                    select: {
+                        title: true,
+                        types: true
+                    }
+                }
             },
         });
+        console.log(emprunts);
 
         return NextResponse.json(emprunts, { status: 200 });
     } catch (error) {
