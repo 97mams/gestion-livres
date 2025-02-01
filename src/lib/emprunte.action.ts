@@ -28,7 +28,9 @@ const checkUniqueEmprunt = async (user: string, bookId: number): Promise<boolean
     return false
 }
 
-export async function deleteEmpruntAction(id: number) {
-    console.log(id);
+export async function deleteEmpruntAction(userEmail: string, bookId: number) {
+    const emprunt = await prisma.emprunts.findFirst({ where: { user: { email: userEmail }, bookId: bookId } })
+    const deleted = await prisma.emprunts.delete({ where: { id: emprunt?.id } })
+    console.log(emprunt);
 
 }
