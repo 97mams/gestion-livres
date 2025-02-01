@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { path } from '../lib/pathHelper';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { prisma } from '../lib/prisma';
 
 
 type emprunt = {
@@ -26,26 +27,23 @@ type emprunt = {
 export function EmpruntCurrent({ userEmail }: { userEmail: string | null | undefined }) {
     const [emprunts, setEmprunts] = useState<emprunt[]>();
     const [loading, setLoading] = useState(true);
-    const url = `/api/emprunts?email=${userEmail}`
 
+    const url = `/api/emprunts?email=${userEmail}`
     useEffect(() => {
-        const fetchEmprunts = async () => {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error('Erreur lors de la récupération des emprunts');
-                }
-                const data = await response.json();
+        fetch(url)
+            .then(resp => resp.json())
+            .then(data => {
                 setLoading(false);
                 setEmprunts(data);
-            } catch (error) {
-                console.log(error);
 
-                throw new Error('warring!!!!')
-            }
-        };
-        fetchEmprunts();
-    }, []);
+            })
+            .catch((error) => {
+                console.log(error);
+                throw new Error(error)
+            })
+
+    }, [url]);
+
 
     return (
         <div className='w-80 mt-8 mx-4'>

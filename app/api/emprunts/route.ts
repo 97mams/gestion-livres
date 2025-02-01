@@ -68,6 +68,7 @@ export async function GET(request: Request) {
             include: {
                 book: {
                     select: {
+                        id: true,
                         title: true,
                         types: true
                     }

@@ -8,6 +8,7 @@ import { toast } from "sonner"
 import { CreateEmprunteAction } from "../lib/emprunte.action"
 
 export function FormAction() {
+    const { pending } = useFormStatus()
     const onSubmit = async (formData: FormData) => {
         await createBookAction({
             title: String(formData.get('title')),
@@ -20,7 +21,7 @@ export function FormAction() {
     }
 
     return (
-        <div className="m-auto">
+        <div>
             <form action={onSubmit}>
                 <h1 className="text-accent font-bold text-3xl my-4">Ajouter un livre</h1>
                 <div className="w-full grid grid-cols-2 gap-2 mb-4">
@@ -28,10 +29,10 @@ export function FormAction() {
                     <Input type="text" name="author" id="author" children="Auteur" />
                     <Input type="type" name="types" id="type" children="Genre" />
                     <Input type="type" name="resume" id="resume" children="Résumer" />
-                    <Input type="type" name="date" id="date-pub" children="Date de publication" />
+                    <Input type="date" name="date" id="date-pub" children="Date de publication" />
                     <Input type="file" name="upImage" id="upImage" children="Image" />
                 </div>
-                <button type="submit">submit</button>
+                <SubmitButton text="ajouter" pending={pending} />
             </form>
         </div>
     )
@@ -74,17 +75,32 @@ export function UserForm({ data }: { data?: user | null }) {
     )
 }
 
-export const FormEmprunt = ({ userEmail, bookId }: { userEmail: string, bookId: number | undefined }) => {
+export const FormEmprunt = ({ userEmail, bookId, onclick, onStatus }: { userEmail: string, bookId: number | undefined, onclick: Function, onStatus: Function }) => {
     const { pending } = useFormStatus()
 
     const handleSubmit = async (formData: FormData) => {
-        if (bookId) CreateEmprunteAction(userEmail, bookId)
+        if (bookId) {
+            CreateEmprunteAction(userEmail, bookId)
+            toast.success("mety")
+            onclick()
+            onStatus(true)
+        }
+
     }
 
     return (
-        <form action={handleSubmit}>
-            <Input type="date" placeholder="limite d'emprunt" name="dateLimit" />
-            <SubmitButton pending={pending} text="confirmer" classname="text-sm" />
+        <form action={handleSubmit} className="flex flex-col gap-2 pb-4">
+            <Input type="date" placeholder="limite d'emprunt" name="d" />
+            <button
+                className="text-sm border border-foreground text-foreground px-2 py-1 rounded-[5px] hover:bg-foreground/20"
+                type="submit"
+            >
+                {pending ?
+                    "loading..."
+                    :
+                    "confirmer"
+                }
+            </button>
         </form>
     )
 }

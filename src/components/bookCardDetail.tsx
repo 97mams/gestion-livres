@@ -79,7 +79,10 @@ const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: 
     }, [changedButton]);
 
     const handlerDelete = async () => {
-        if (bookId) await deleteEmpruntAction(email, bookId)
+        if (bookId) {
+            await deleteEmpruntAction(email, bookId)
+            setChangedButton(!changedButton)
+        }
     }
 
     const handleState = (state: boolean) => {

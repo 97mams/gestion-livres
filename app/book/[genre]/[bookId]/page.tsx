@@ -4,7 +4,6 @@ import { BackButton } from "@/src/components/backButton"
 import { auth } from "@/src/lib/auth"
 import { redirect } from "next/navigation"
 import { BookCardDetail } from "@/src/components/bookCardDetail"
-import { checkedUserWithBook } from "@/src/lib/book.action"
 
 export default async function Page(props: {
     params: Promise<{
@@ -38,7 +37,7 @@ export default async function Page(props: {
     return (
         <div className="p-8 w-full">
             <BackButton />
-            <BookCardDetail email={String(session.user?.email)} etat={await checkedUserWithBook(book?.id, String(session.user?.email))} book={book} />
+            <BookCardDetail email={String(session.user?.email)} book={book} />
             <ListBook data={bookRender} title="Même genre" />
         </div>
     )

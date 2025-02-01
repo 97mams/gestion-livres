@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import path from "node:path"
 import fs from "node:fs"
 
-const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "", "public/uploads")
+const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "")
 
 export async function createBookAction(book: {
     title: string,
@@ -25,8 +25,6 @@ export async function createBookAction(book: {
             fs.mkdirSync(UPLOAD_DIR)
         }
 
-        // console.log((file as File).name)
-
         fs.writeFileSync(path.resolve(UPLOAD_DIR, (file as File).name), buffer)
         const newBook = await prisma.books.create({
             data: {
@@ -39,8 +37,7 @@ export async function createBookAction(book: {
             }
         })
         if (newBook) {
-            revalidatePath('/bool/list')
-            redirect('/book/list')
+            redirect('admin/book/list')
         } else {
             new Error("Reccoding fails")
         }
