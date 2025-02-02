@@ -42,7 +42,7 @@ export function EmpruntCurrent({ userEmail }: { userEmail: string | null | undef
                 throw new Error(error)
             })
 
-    }, [url]);
+    }, [emprunts]);
 
 
     return (

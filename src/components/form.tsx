@@ -75,7 +75,11 @@ export function UserForm({ data }: { data?: user | null }) {
     )
 }
 
-export const FormEmprunt = ({ userEmail, bookId, onclick, onStatus }: { userEmail: string, bookId: number | undefined, onclick: Function, onStatus: Function }) => {
+export const FormEmprunt = (
+    { userEmail, bookId, onclick, onStatus }
+        :
+        { userEmail: string, bookId: number | undefined, onclick: Function, onStatus: Function }
+) => {
     const { pending } = useFormStatus()
 
     const handleSubmit = async (formData: FormData) => {
