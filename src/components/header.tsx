@@ -1,12 +1,10 @@
-import Image from "next/image"
-import { faker } from "@faker-js/faker"
 import { Avatar } from "./avatar"
 import { auth } from "../lib/auth"
-import { LogOut } from "./logout"
 
 export async function Header() {
     const session = await auth()
     const email: string = String(session?.user?.email)
+
 
     return (
         <nav className="sticky top-0 z-10 bg-accent text-foreground">
@@ -14,6 +12,7 @@ export async function Header() {
                 < div className="flex items-center justify-between h-16" >
                     <span className="text-2xl font-semibold">Boky</span>
                     <div className="flex space-x-4 items-baseline">
+                        <p>{email ?? ''}</p>
                         {session ?
                             <div className="flex gap-4 items-center">
                                 <a href="/">Home</a>

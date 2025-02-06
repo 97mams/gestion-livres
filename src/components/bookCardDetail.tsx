@@ -5,6 +5,7 @@ import { toast } from "sonner"
 import { FormEmprunt } from "./form";
 import { checkedUserWithBook } from "../lib/book.action";
 import { deleteEmpruntAction } from "../lib/emprunte.action";
+import { getSession } from "next-auth/react";
 
 type bookType = {
     title: string;
@@ -25,6 +26,10 @@ export function BookCardDetail(
     }: {
         book: bookType | null, email: string
     }) {
+
+    const s = getSession()
+    console.log('ito', s);
+
 
     return (
         <div

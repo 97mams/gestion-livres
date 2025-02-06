@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { path } from "../lib/pathHelper";
 
 export function SideBar(props: { items: String[] }) {
@@ -15,7 +15,7 @@ export function SideBar(props: { items: String[] }) {
     return (
         <div className="w-60 border-r px-4 border-r-gray-700 min-h-screen rounded-md">
             <p className="text-xl w-full mt-8 bg-gray-900 rounded-sm p-2">Genres</p>
-            <ul className="w-full flex flex-col gap-2 mt-2 ">
+            <ul className="w-full flex flex-col gap-2 mt-2 overflow-auto">
                 {
                     props.items.map((item, key) => (
                         <li
