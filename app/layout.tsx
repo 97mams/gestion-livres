@@ -46,11 +46,11 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} `}>
-        <div className="w-full h-screen max-h-screen overflow-hidden">
+        <div className="w-full">
           <Header />
           <div className="w-full flex items-start pl-8">
             {session ? <SideBar items={data} /> : ''}
-            <div className="flex h-screen w-full justify-center overflow-scroll">
+            <div className="flex h-screen w-full mt-8 justify-center overflow-scroll">
               {children}
             </div>
             {session ? <EmpruntCurrent userEmail={session?.user?.email} /> : ''}
