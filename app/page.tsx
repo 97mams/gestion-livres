@@ -1,10 +1,17 @@
 import { prisma } from "@/src/lib/prisma";
 import { ListBook } from "@/src/components/listBook";
-import { EmpruntCurrent } from "@/src/components/empruntCurrent";
-import { auth } from "@/src/lib/auth";
 
 export default async function Page() {
-  const allBook = await prisma.books.findMany()
+  const allBook = await prisma.books.findMany({
+    select: {
+      id: true,
+      author: true,
+      title: true,
+      date_publish: true,
+      types: true,
+      mockupImages: true
+    }
+  })
   const recentBook = await prisma.books.findMany({
     orderBy: { createdAt: "desc" },
     take: 4

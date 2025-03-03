@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { toast } from "sonner"
 import { FormEmprunt } from "./form";
 import { checkedUserWithBook } from "../lib/book.action";
 import { deleteEmpruntAction } from "../lib/emprunte.action";
@@ -27,8 +26,6 @@ export function BookCardDetail(
         book: bookType | null, email: string
     }) {
 
-    const s = getSession()
-    console.log('ito', s);
 
 
     return (
@@ -74,11 +71,17 @@ export function BookCardDetail(
 const ButtonEmprunte = ({ bookId, email }: { bookId: number | undefined, email: string }) => {
     const [showCardConfirm, setCardConfirm] = useState(false)
     const [changedButton, setChangedButton] = useState<boolean>()
+    console.log(changedButton);
+
 
     useEffect(() => {
         const fetch = async () => {
-            const bookEmprunted = await checkedUserWithBook(bookId, email)
-            setChangedButton(bookEmprunted)
+            const session = await getSession()
+            const e = session?.user?.email
+            if (e) {
+                const bookEmprunted = await checkedUserWithBook(bookId, e)
+                setChangedButton(bookEmprunted)
+            }
         };
         fetch()
     }, [changedButton]);

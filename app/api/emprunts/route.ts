@@ -75,7 +75,6 @@ export async function GET(request: Request) {
                 }
             },
         });
-        console.log(emprunts);
 
         return NextResponse.json(emprunts, { status: 200 });
     } catch (error) {

@@ -6,10 +6,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { prisma } from '../lib/prisma';
 import useSWR from 'swr'
 
+const fetcher = (url: string) => fetch(url).then(resp => resp.json())
 
 export function EmpruntCurrent({ userEmail }: { userEmail: string | null | undefined }) {
-    const url: string = `/api/emprunts?email=${userEmail}`
-    const fetcher = (url: string) => fetch(url).then(resp => resp.json())
     const { data, error, isLoading } = useSWR(`/api/emprunts?email=${userEmail}`, fetcher)
 
 
