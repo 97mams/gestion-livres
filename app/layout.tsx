@@ -8,6 +8,7 @@ import { prisma } from "@/src/lib/prisma";
 import { auth } from "@/src/lib/auth";
 import { Toaster } from 'sonner';
 import { EmpruntCurrent } from "@/src/components/empruntCurrent";
+import { LoginForm } from "@/src/components/login-form";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -46,12 +47,12 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} `}>
-        <div className="w-full">
+        <div className="w-full flex flex-col">
           <Header />
           <div className="w-full flex items-start pl-8">
             {session ? <SideBar items={data} /> : ''}
-            <div className="flex h-screen w-full mt-8 justify-center overflow-scroll">
-              {children}
+            <div className="flex w-full mt-8 justify-center overflow-scroll">
+              {session ? children : <LoginForm />}
             </div>
             {session ? <EmpruntCurrent userEmail={session?.user?.email} /> : ''}
           </div>

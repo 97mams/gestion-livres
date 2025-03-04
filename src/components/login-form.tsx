@@ -10,7 +10,7 @@ export function LoginForm() {
 
     return (
         <form action={formAction} className="space-y-3 p-8">
-            <div className="flex-1 rounded-lg bg-card">
+            <div className="flex-1 rounded-lg">
                 <h1 className="mb-3 border-b-2 border-border text-center text-2xl">
                     Authentification
                 </h1>
