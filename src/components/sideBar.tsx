@@ -13,20 +13,22 @@ export function SideBar(props: { items: String[] }) {
     }
 
     return (
-        <div className="w-72 border-r pl-4 border-r-gray-700 overflow-auto h-screen rounded-md">
+        <div className="w-72 border-r pl-4 border-r-gray-700 h-screen rounded-md">
             <p className="text-xl w-full mt-8 bg-gray-900 rounded-sm p-2">Genres</p>
-            <ul className="w-full flex flex-col gap-2 mt-2">
-                {
-                    props.items.map((item, key) => (
-                        <li
-                            key={key}
-                            className={`w-full hover:line-through ${pathname.includes(chechItem(item)) ? active : ''}`}
-                        >
-                            <Link href={`/book/lists/${path(item)}`}>{item}</Link>
-                        </li>
-                    ))
-                }
-            </ul>
+            <div className="h-[28rem] pb-2 overflow-auto">
+                <ul className="mt-2">
+                    {
+                        props.items.map((item, key) => (
+                            <li
+                                key={key}
+                                className={`w-full my-2 hover:line-through ${pathname.includes(chechItem(item)) ? active : ''}`}
+                            >
+                                <Link href={`/book/lists/${path(item)}`}>{item}</Link>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
         </div >
     )
 }
