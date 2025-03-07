@@ -21,8 +21,7 @@ export function LoginForm() {
                 name="password"
                 placeholder="password"
             />
-            <Button variant={"outline"} className="mt-2">Connecter</Button>
-            {/* <SubmitButton pending={isPending} text="Login" /> */}
+            <SubmitButton pending={isPending} text="se connecter" classname="mt-2" />
             <div
                 className="flex h-8 items-end space-x-1"
                 aria-live="polite"

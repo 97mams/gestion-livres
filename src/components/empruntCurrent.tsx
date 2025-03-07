@@ -13,21 +13,26 @@ export function EmpruntCurrent({ userEmail }: { userEmail: string | null | undef
 
 
     return (
-        <div className='w-80 mt-8 h-screen mx-4'>
-            <div className="flex justify-between">
-                <h1 className="text-xl font-bold">Livres </h1>
-                <FavoriteIcon color='secondary' />
-            </div>
+        <div className='fixed right-0 top-20'>
             {isLoading ?
-                <div>Chargement...</div>
+                ''
                 :
-                <ul className='flex flex-col gap-2 mt-4'>
-                    {data?.map((emprunt: any) => (
-                        <li key={(emprunt.id)} className='hover:text-secondary'>
-                            <a href={`/book/${path(emprunt.book.types)}/${emprunt.book.id}`}>{emprunt.book.title}</a>
-                        </li>
-                    ))}
-                </ul>}
+                <div className='min-w-50 mt-8 mx-8'>
+                    <p className='font-medium'>Votre livre</p>
+                    <ul>
+                        {data?.map((emprunt: any) => (
+                            <li key={(emprunt.id)}>
+                                <a
+                                    href={`/book/${path(emprunt.book.types)}/${emprunt.book.id}`}
+                                    className='hover:underline w-full inline-block no-underline transition-colors hower:text-foreground text-muted-foreground overflow'
+                                >
+                                    {emprunt.book.title}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            }
         </div>
     );
 }

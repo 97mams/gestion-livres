@@ -17,7 +17,7 @@ export default async function Page() {
     take: 4
   })
   return (
-    <div className="w-full h-screen p-4 flex">
+    <div className="w-full flex">
       <div className="flex flex-col gap-3">
         <ListBook data={recentBook} title="Nouveaux livres" />
         <ListBook data={allBook} title="Touts livres" />

@@ -3,32 +3,36 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { path } from "../lib/pathHelper";
+import { Card } from "./ui/card";
 
 export function SideBar(props: { items: String[] }) {
     const pathname: string = usePathname()
-    const active: string = "line-through"
+    const active: string = "bg-accent"
     const chechItem = (item: String) => {
         const text = item.split(' ')
         return text[0]
     }
 
     return (
-        <div className="w-72 border-r pl-4 border-r-gray-700 h-screen rounded-md">
-            <p className="text-xl w-full mt-8 bg-gray-900 rounded-sm p-2">Genres</p>
-            <div className="h-[28rem] pb-2 overflow-auto">
-                <ul className="mt-2">
+        <div className=" fixed pr-20 top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-lg shrink-0 md:sticky md:block">
+            <div className="w-52 pl-4 pt-12">
+                <h4>Genres</h4>
+                <div className="grid grid-flow-row auto-rows-max gap-0.5 text-sm h-[calc(100vh-8rem)] pb-2 overflow-auto border border-red">
                     {
                         props.items.map((item, key) => (
-                            <li
+                            <Link
+                                href={`/book/lists/${path(item)}`}
                                 key={key}
-                                className={`w-full my-2 hover:line-through ${pathname.includes(chechItem(item)) ? active : ''}`}
+                                className={`
+                            group relative flex h-8 w-full items-center rounded-lg px-2 hover:bg-accent font-normal text-foreground
+                            ${pathname.includes(chechItem(item)) ? active : ''}`}
                             >
-                                <Link href={`/book/lists/${path(item)}`}>{item}</Link>
-                            </li>
+                                {item}
+                            </Link>
                         ))
                     }
-                </ul>
-            </div>
-        </div >
+                </div>
+            </div >
+        </div>
     )
 }

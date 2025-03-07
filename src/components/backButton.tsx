@@ -2,6 +2,7 @@
 
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
 import { useRouter } from 'next/navigation';
+import { Button } from './ui/button';
 
 export function BackButton() {
     const router = useRouter()
@@ -9,8 +10,8 @@ export function BackButton() {
         router.back()
     }
     return (
-        <button onClick={backPage} className='cursor-pointer mb-3 px-2 py-1 hover:px-1 border hover:shadow-lg hover:shadow-primary border-border rounded-xl'>
+        <Button onClick={backPage} variant={'outline'} className='mb-2'>
             <KeyboardBackspaceOutlinedIcon /> retour
-        </button>
+        </Button>
     )
 }
