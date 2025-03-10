@@ -17,7 +17,7 @@ export function SideBar(props: { items: String[] }) {
         <div className=" fixed pr-20 top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-lg shrink-0 md:sticky md:block">
             <div className="w-52 pl-4 pt-12">
                 <h4>Genres</h4>
-                <div className="grid grid-flow-row auto-rows-max gap-0.5 text-sm h-[calc(100vh-8rem)] pb-2 overflow-auto border border-red">
+                <div className="grid grid-flow-row auto-rows-max gap-0.5 text-sm pr-3 h-[calc(100vh-8rem)] pb-2 overflow-auto">
                     {
                         props.items.map((item, key) => (
                             <Link

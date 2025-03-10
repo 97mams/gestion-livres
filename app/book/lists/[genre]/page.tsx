@@ -22,7 +22,7 @@ export default async function (props: {
     })
 
     return (
-        <div className="h-screen p-8">
+        <div>
             <BackButton />
             <ListBook data={bookByGenre} title={genre} />
         </div>
