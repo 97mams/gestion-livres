@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { checkedUserWithBook } from "../lib/book.action";
 import { deleteEmpruntAction } from "../lib/emprunte.action";
 import { FormEmprunt } from "./form";
+import { Button } from "./ui/button";
 
 type bookType = {
   title: string;
@@ -85,7 +86,6 @@ const ButtonEmprunte = ({
 }) => {
   const [showCardConfirm, setCardConfirm] = useState(false);
   const [changedButton, setChangedButton] = useState<boolean>();
-  console.log(changedButton);
 
   useEffect(() => {
     const fetch = async () => {
@@ -97,7 +97,7 @@ const ButtonEmprunte = ({
       }
     };
     fetch();
-  }, [changedButton]);
+  }, [bookId]);
 
   const handlerDelete = async () => {
     if (bookId) {
@@ -139,21 +139,12 @@ const ButtonEmprunte = ({
         ""
       )}
       <div>
-        {changedButton ? (
-          <button
-            onClick={handlerDelete}
-            className="px-3 py-2 border border-secondary rounded text-secondary hover:bg-foreground/20"
-          >
-            annuler
-          </button>
-        ) : (
-          <button
-            onClick={canceledCard}
-            className="px-3 py-2 border border-secondary rounded text-secondary hover:bg-foreground/20"
-          >
-            prendre
-          </button>
-        )}
+        <Button
+          variant={"default"}
+          onClick={changedButton ? handlerDelete : canceledCard}
+        >
+          {changedButton ? "retirer" : "Prendre"}
+        </Button>
       </div>
     </div>
   );
