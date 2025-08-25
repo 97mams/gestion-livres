@@ -1,11 +1,13 @@
 "use client";
-import { Input } from "@/src/components/input";
-import { createBookAction } from "@/src/lib/book.action";
-import { CreateUserAction, updateUserAction } from "@/src/lib/user.action";
+import { createBookAction } from "@/lib/book.action";
+import { CreateUserAction, updateUserAction } from "@/lib/user.action";
 import { useFormStatus } from "react-dom";
-import { SubmitButton } from "./SubmitButton";
 import { toast } from "sonner";
 import { CreateEmprunteAction } from "../lib/emprunte.action";
+import { SubmitButton } from "./SubmitButton";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 export function FormAction() {
   const { pending } = useFormStatus();
@@ -27,17 +29,17 @@ export function FormAction() {
           Ajouter un livre
         </h1>
         <div className="w-full grid grid-cols-2 gap-2 mb-4">
-          <Input type="text" name="title" id="title" title="Titre" />
-          <Input type="text" name="author" id="author" title="Auteur" />
-          <Input type="type" name="types" id="type" title="Genre" />
-          <Input type="type" name="resume" id="resume" title="Résumer" />
+          <Input type="text" name="title" id="title" placeholder="Titre" />
+          <Input type="text" name="author" id="author" placeholder="Auteur" />
+          <Input type="type" name="types" id="type" placeholder="Genre" />
+          <Input type="type" name="resume" id="resume" placeholder="Résumer" />
           <Input
             type="date"
             name="date"
             id="date-pub"
-            title="Date de publication"
+            placeholder="Date de publication"
           />
-          <Input type="file" name="upImage" id="upImage" title="Image" />
+          <Input type="file" name="upImage" id="upImage" placeholder="Image" />
         </div>
         <SubmitButton text="ajouter" pending={pending} />
       </form>
@@ -69,46 +71,46 @@ export function UserForm({ data }: { data?: user | null }) {
 
   return (
     <form className="w-full" action={onSubmit}>
+      <Label htmlFor="first-name">Nom</Label>
       <Input
-        dValue={data?.firstName}
+        defaultValue={data?.firstName}
         className="w-full"
         name="firstName"
         id="first-name"
-        title="Nom"
         placeholder="votre nom"
       />
+      <Label htmlFor="last-name">Prenom</Label>
       <Input
-        dValue={data?.lastName}
+        defaultValue={data?.lastName}
         className="w-full"
         name="lastName"
         id="last-name"
-        title="Prénoms"
         placeholder="votre prenom"
       />
+      <Label htmlFor="e-mail">Email</Label>
       <Input
-        dValue={data?.email}
+        defaultValue={data?.email}
         className="w-full"
         name="mail"
         id="e-mail"
-        title="E-mail"
         type="mail"
         placeholder="exemple@gmail.com"
       />
+      <Label htmlFor="contact">Numéro de téléphone</Label>
       <Input
-        dValue={data?.tel}
+        defaultValue={data?.tel}
         className="w-full"
         name="contact"
         id="contact"
-        title="Téléphone"
         placeholder="numéro téléphone"
       />
+      <Label htmlFor="pwd">Mot de passe</Label>
       <Input
-        dValue={data?.password}
+        defaultValue={data?.password}
         type="password"
         className="w-full"
         name="pwd"
         id="pwd"
-        title="Mot de passe"
         placeholder="mot de passe"
       />
       <SubmitButton pending={pending} text={data ? "Modifier" : "Ajouter"} />
@@ -143,12 +145,9 @@ export const FormEmprunt = ({
   return (
     <form action={handleSubmit} className="flex flex-col gap-2 pb-4">
       <Input type="date" placeholder="limite d'emprunt" name="date" />
-      <button
-        className="text-sm border border-foreground text-foreground px-2 py-1 rounded-[5px] hover:bg-foreground/20"
-        type="submit"
-      >
+      <Button variant={"default"} type="submit">
         {pending ? "loading..." : "confirmer"}
-      </button>
+      </Button>
     </form>
   );
 };

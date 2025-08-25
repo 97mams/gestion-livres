@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Header } from "@/src/components/header";
-import { Footer } from "@/src/components/footer";
-import { SideBar } from "@/src/components/sideBar";
-import { prisma } from "@/src/lib/prisma";
-import { auth } from "@/src/lib/auth";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { SideBar } from "@/components/sideBar";
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
 import { Toaster } from "sonner";
-import { EmpruntCurrent } from "@/src/components/empruntCurrent";
-import { LoginForm } from "@/src/components/login-form";
+import { EmpruntCurrent } from "@/components/empruntCurrent";
+import { LoginForm } from "@/components/login-form";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

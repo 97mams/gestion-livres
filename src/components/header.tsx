@@ -1,5 +1,6 @@
 import { Avatar } from "./avatar"
 import { auth } from "../lib/auth"
+import Link from "next/link"
 
 export async function Header() {
     const session = await auth()
@@ -13,7 +14,7 @@ export async function Header() {
                     <div className="flex space-x-4 items-baseline">
                         {session ?
                             <div className="flex gap-4 items-center">
-                                <a href="/">Home</a>
+                                <Link href="/">Home</Link>
                                 <Avatar email={email} />
                             </div>
                             : <a className="px-3 py-2 border border-foreground hover:outline hover:outline-primary rounded-xl" href="/login">Se connecter</a>
