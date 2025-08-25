@@ -6,7 +6,7 @@ import { Footer } from "@/src/components/footer";
 import { SideBar } from "@/src/components/sideBar";
 import { prisma } from "@/src/lib/prisma";
 import { auth } from "@/src/lib/auth";
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 import { EmpruntCurrent } from "@/src/components/empruntCurrent";
 import { LoginForm } from "@/src/components/login-form";
 
@@ -31,32 +31,35 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth()
+  const session = await auth();
 
   const genres = await prisma.books.findMany({
     select: {
-      types: true
-    }
-  })
+      types: true,
+    },
+  });
 
-  const arrayGenres = Array.from(genres, (g) => g.types)
+  const arrayGenres = Array.from(genres, (g) => g.types);
 
-  const data = [...new Set(arrayGenres)]
+  const data = [...new Set(arrayGenres)];
 
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} `}>
+      <body className={`${geistSans.variable} ${geistMono.variable} `}>
         <div className="relative flex min-h-svh flex-col bg-background">
-          <div className="flex flex-1 flex-col">
-            <main className="flex flex-1 flex-col">
+          <div className="flex flex-col">
+            <main className="flex flex-col">
               <Header />
-              <div className="container flex flex-1 items-start">
-                {session ? <SideBar items={data} /> : ''}
+              <div className="container flex items-start">
+                {session ? <SideBar items={data} /> : ""}
                 <div className="relative py-6 lg:gap-10 lg:py-8">
                   <div className="mx-auto w-full min-w-0 max-w-3xl">
                     {session ? children : <LoginForm />}
-                    {session ? <EmpruntCurrent userEmail={session?.user?.email} /> : ''}
+                    {session ? (
+                      <EmpruntCurrent userEmail={session?.user?.email} />
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               </div>
