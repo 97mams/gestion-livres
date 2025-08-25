@@ -1,7 +1,8 @@
 "use client";
 
-import { path } from "../lib/pathHelper";
+import { Books } from "@prisma/client";
 import useSWR from "swr";
+import { path } from "../lib/pathHelper";
 
 const fetcher = (url: string) => fetch(url).then((resp) => resp.json());
 
@@ -27,8 +28,8 @@ export function EmpruntCurrent({
         <div className="min-w-50 mt-8 mx-8">
           <p className="font-medium">Votre livre</p>
           <ul>
-            {data?.map((emprunt: any) => (
-              <li key={emprunt.id}>
+            {data?.map((emprunt: { book: Books }) => (
+              <li key={emprunt.book.id}>
                 <a
                   href={`/book/${path(emprunt.book.types)}/${emprunt.book.id}`}
                   className="hover:underline w-full inline-block no-underline transition-colors hower:text-foreground text-muted-foreground overflow"
