@@ -69,6 +69,7 @@ export function BookCardDetail({
           {book?.title}
         </h3>
         <p className="md:text-lg text-gray-500 text-base">{book?.resume}</p>
+
         <div>
           <ButtonEmprunte bookId={book?.id} email={email} />
         </div>
