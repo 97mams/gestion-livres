@@ -14,6 +14,8 @@ export function BookCard(props: {
       key={props.bkey}
     >
       <Image
+        width={220}
+        height={160}
         src={`/uploads/${props.image}`}
         alt="Product"
         className="h-40 w-72 object-cover rounded-t-xl"
