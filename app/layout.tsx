@@ -1,14 +1,14 @@
+import { EmpruntCurrent } from "@/components/empruntCurrent";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { LoginForm } from "@/components/login-form";
+import { SideBar } from "@/components/sideBar";
+import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { SideBar } from "@/components/sideBar";
-import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
 import { Toaster } from "sonner";
-import { EmpruntCurrent } from "@/components/empruntCurrent";
-import { LoginForm } from "@/components/login-form";
+import "./globals.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,6 +39,8 @@ export default async function RootLayout({
     },
   });
 
+  console.log(session);
+
   const arrayGenres = Array.from(genres, (g) => g.types);
 
   const data = [...new Set(arrayGenres)];
@@ -52,8 +54,8 @@ export default async function RootLayout({
               <Header />
               <div className="container flex items-start">
                 {session ? <SideBar items={data} /> : ""}
-                <div className="relative py-6 lg:gap-10 lg:py-8">
-                  <div className="mx-auto w-full min-w-0 max-w-3xl">
+                <div className="relative lg:gap-10 lg:py-8">
+                  <div className="w-full min-w-0 max-w-3xl">
                     {session ? children : <LoginForm />}
                     {session ? (
                       <EmpruntCurrent userEmail={session?.user?.email} />

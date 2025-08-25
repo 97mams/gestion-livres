@@ -10,10 +10,17 @@ import {
 import { prisma } from "@/lib/prisma";
 
 export async function ListUser() {
-  const title: string[] = ["Nom", "Prénoms", "Mail", "Tel"];
+  const title: string[] = ["Nom", "Prénoms", "Mail", "Tel", "Rôle"];
 
   const users = await prisma.user.findMany({
-    select: { name: true, lastName: true, email: true, tel: true, id: true },
+    select: {
+      name: true,
+      lastName: true,
+      email: true,
+      tel: true,
+      id: true,
+      role: true,
+    },
   });
 
   return (
@@ -36,6 +43,7 @@ export async function ListUser() {
               <TableCell>{users.lastName}</TableCell>
               <TableCell>{users.email}</TableCell>
               <TableCell className="text-right">{users.tel}</TableCell>
+              <TableCell className="text-right">{users.role}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -113,7 +113,11 @@ export function UserForm({ data }: { data?: user | null }) {
         id="pwd"
         placeholder="mot de passe"
       />
-      <SubmitButton pending={pending} text={data ? "Modifier" : "Ajouter"} />
+      <SubmitButton
+        classname="mt-4"
+        pending={pending}
+        text={data ? "Modifier" : "Ajouter"}
+      />
     </form>
   );
 }
