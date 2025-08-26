@@ -53,27 +53,25 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} `}>
-        <div className="relative flex min-h-svh flex-col bg-background">
-          <div className="flex flex-col">
-            <main className="flex flex-col">
-              <Header />
-              <div className="container flex items-start">
-                {session && role === "user" ? <SideBar items={data} /> : ""}
-                <div className="relative lg:gap-10 lg:py-8">
-                  <div className="w-full min-w-0 max-w-3xl">
-                    {session ? children : <LoginForm />}
-                    {session && role === "user" ? (
-                      <EmpruntCurrent userEmail={session?.user?.email} />
-                    ) : (
-                      ""
-                    )}
-                  </div>
+        <div className="relative flex min-h-svh flex-col bg-background bg-red-800">
+          <main className="flex flex-col bg-green-500">
+            <Header />
+            <div className="flex items-start">
+              {session && role === "user" ? <SideBar items={data} /> : ""}
+              <div className="relative lg:gap-10 lg:py-8">
+                <div className="w-full">
+                  {session ? children : <LoginForm />}
+                  {session && role === "user" ? (
+                    <EmpruntCurrent userEmail={session?.user?.email} />
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
-            </main>
-            <Footer />
-            <Toaster />
-          </div>
+            </div>
+          </main>
+          <Footer />
+          <Toaster />
         </div>
       </body>
     </html>
