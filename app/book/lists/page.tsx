@@ -1,5 +1,5 @@
-import { prisma } from "@/src/lib/prisma";
-import { BookCard } from "@/src/components/bookCard";
+import { BookCard } from "@/components/bookCard";
+import { prisma } from "@/lib/prisma";
 
 export default async function Page() {
   const allBook = await prisma.books.findMany();
