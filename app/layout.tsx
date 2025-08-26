@@ -39,7 +39,12 @@ export default async function RootLayout({
     },
   });
 
-  console.log(session);
+  const user = await prisma.user.findUnique({
+    select: { role: true },
+    where: { email: session?.user?.email || "" },
+  });
+
+  const role = user?.role;
 
   const arrayGenres = Array.from(genres, (g) => g.types);
 
@@ -53,11 +58,11 @@ export default async function RootLayout({
             <main className="flex flex-col">
               <Header />
               <div className="container flex items-start">
-                {session ? <SideBar items={data} /> : ""}
+                {session && role === "user" ? <SideBar items={data} /> : ""}
                 <div className="relative lg:gap-10 lg:py-8">
                   <div className="w-full min-w-0 max-w-3xl">
                     {session ? children : <LoginForm />}
-                    {session ? (
+                    {session && role === "user" ? (
                       <EmpruntCurrent userEmail={session?.user?.email} />
                     ) : (
                       ""
