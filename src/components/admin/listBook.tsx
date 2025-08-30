@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -8,21 +10,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { prisma } from "@/lib/prisma";
+import { MinusIcon } from "lucide-react";
+import { useState } from "react";
+import { Button } from "../ui/button";
 
-export async function ListBook() {
-  const title: string[] = ["Titres", "Genres", "Ecrivin"];
+type book = { id: number; title: string; author: string; types: string };
 
-  const books = await prisma.books.findMany({
-    select: {
-      id: true,
-      title: true,
-      types: true,
-      author: true,
-    },
-  });
+export function ListBook() {
+  const title: string[] = ["Titres", "Genres", "Auteur", "Action"];
+  const [isBook, setIsBooks] = useState<[book]>([]);
 
-  const countBooks = books.length;
+  fetch("/api/book").then((json) => console.log("books", json));
+
+  const countBooks = isBook?.length;
 
   return (
     <div className="w-full">
@@ -42,7 +42,17 @@ export async function ListBook() {
             <TableRow key={book.id}>
               <TableCell className="font-medium">{book.title}</TableCell>
               <TableCell>{book.types}</TableCell>
-              <TableCell className="text-right">{book.author}</TableCell>
+              <TableCell>{book.author}</TableCell>
+              <TableCell>
+                <Button
+                  variant={"ghost"}
+                  size={"sm"}
+                  className="text-red-400 hover:text-red-600"
+                  onClick={hadleDelete}
+                >
+                  <MinusIcon />
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
