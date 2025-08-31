@@ -8,9 +8,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { prisma } from "@/lib/prisma";
+import { Button } from "../ui/button";
 
 export async function ListUser() {
-  const title: string[] = ["Nom", "Prénoms", "Mail", "Tel", "Rôle"];
+  const title: string[] = ["Nom", "Prénoms", "Mail", "Tel", "Rôle", "Actions"];
 
   const users = await prisma.user.findMany({
     select: {
@@ -42,8 +43,16 @@ export async function ListUser() {
               <TableCell className="font-medium">{users.name}</TableCell>
               <TableCell>{users.lastName}</TableCell>
               <TableCell>{users.email}</TableCell>
-              <TableCell className="text-right">{users.tel}</TableCell>
-              <TableCell className="text-right">{users.role}</TableCell>
+              <TableCell>{users.tel}</TableCell>
+              <TableCell>{users.role}</TableCell>
+              <TableCell>
+                <Button
+                  variant={"ghost"}
+                  className="text-red-200 hover:text-red-500"
+                >
+                  X
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
