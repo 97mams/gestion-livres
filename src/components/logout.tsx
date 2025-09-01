@@ -2,16 +2,16 @@
 
 import { LogOutIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { Button } from "./ui/button";
 
-export function LogOut(props: { classname: string }) {
+export function LogOut() {
   const handelSingOut = async () => {
     await signOut();
   };
 
   return (
-    <a onClick={handelSingOut} className={props.classname + " cursor-pointer"}>
-      Se deconnecter
+    <Button onClick={handelSingOut}>
       <LogOutIcon />
-    </a>
+    </Button>
   );
 }
