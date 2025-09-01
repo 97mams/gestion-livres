@@ -55,7 +55,7 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} `}>
         <div className="relative flex min-h-svh flex-col bg-background">
           <main className="w-full h-screen flex flex-col">
-            {role === "user" ? <Header /> : ""}
+            {role === "admin" ? "" : <Header />}
             <div className="flex items-start">
               {session && role === "user" ? <SideBar items={data} /> : ""}
               <div className="w-full">
@@ -67,7 +67,7 @@ export default async function RootLayout({
                 )}
               </div>
             </div>
-            {role === "user" ? <Footer /> : ""}
+            {role === "admin" ? "" : <Footer />}
           </main>
           <Toaster />
         </div>

@@ -1,12 +1,20 @@
-import { SidebarAdmin } from "@/components/admin/sidebarAdmin";
+import { AppSidebar } from "@/components/app-sidebar";
+import { LogOut } from "@/components/logout";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="w-full flex">
-      <SidebarAdmin />
-      <div>{children}</div>
-    </div>
+    <SidebarProvider>
+      <AppSidebar />
+      <div className="w-full">
+        <div className="w-full flex justify-between pr-8 pt-2">
+          <SidebarTrigger />
+          <LogOut />
+        </div>
+        {children}
+      </div>
+    </SidebarProvider>
   );
 }
