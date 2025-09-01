@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { LoginForm } from "@/components/login-form";
 import { SideBar } from "@/components/sideBar";
+import { ThemeProvider } from "@/components/theme-provider";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import type { Metadata } from "next";
@@ -53,24 +54,31 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} `}>
-        <div className="relative flex min-h-svh flex-col bg-background">
-          <main className="w-full h-screen flex flex-col">
-            {role === "admin" ? "" : <Header />}
-            <div className="flex items-start">
-              {session && role === "user" ? <SideBar items={data} /> : ""}
-              <div className="w-full">
-                {session ? children : <LoginForm />}
-                {session && role === "user" ? (
-                  <EmpruntCurrent userEmail={session?.user?.email} />
-                ) : (
-                  ""
-                )}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="relative flex min-h-svh flex-col bg-background">
+            <main className="w-full h-screen flex flex-col">
+              {role === "admin" ? "" : <Header />}
+              <div className="flex items-start">
+                {session && role === "user" ? <SideBar items={data} /> : ""}
+                <div className="w-full">
+                  {session ? children : <LoginForm />}
+                  {session && role === "user" ? (
+                    <EmpruntCurrent userEmail={session?.user?.email} />
+                  ) : (
+                    ""
+                  )}
+                </div>
               </div>
-            </div>
-            {role === "admin" ? "" : <Footer />}
-          </main>
-          <Toaster />
-        </div>
+              {role === "admin" ? "" : <Footer />}
+            </main>
+            <Toaster />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
