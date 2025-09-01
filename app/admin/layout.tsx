@@ -1,10 +1,20 @@
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar } from "@/components/admin/app-sidebar";
 import { LogOut } from "@/components/logout";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { checkUserRole } from "../../server/user.server";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const session = await auth();
+  const email = String(session?.user?.email);
+  const role = await checkUserRole(email);
+
+  if (role != "admin") {
+    redirect("/");
+  }
   return (
     <SidebarProvider>
       <AppSidebar />
